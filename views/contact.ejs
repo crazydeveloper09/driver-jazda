@@ -1,0 +1,87 @@
+<%- include("partials/header") %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background: #eeeeee">
+                <div class="card-title text-center text-danger" id="name">                            
+                    Kontakt
+                    <br>
+                    <span class="school">Jak do nas dotrzeć?</span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 text-center">
+                            <p class="title text-danger">DRIVER Nauka Jazdy Głogów</p>
+                            <p class="info"><strong>(SALA WYKŁADOWA, BIURO)</strong></p>
+                            <p class="info">
+                                ul. Lompy 23
+                                <br>
+                                (wejście od ul.Wojska Polskiego, <br>
+                                naprzeciw jednostki wojskowej)
+                                <br>
+                                67-200 Głogów
+                            </p>
+                            <p class="title text-danger">Biuro otwarte w każdy wtorek i czwartek od godziny 14.00 do 17.00</p>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2475.0434798355236!2d16.067460215891998!3d51.65904030742522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4705f42053d5bd23%3A0x732419ca2b96e175!2sDRIVER%20Nauka%20Jazdy%20G%C5%82og%C3%B3w!5e0!3m2!1spl!2spl!4v1578684369159!5m2!1spl!2spl" frameborder="0" style="border:0;" allowfullscreen=""></iframe> 
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-12 text-center">
+                                <p class="title text-danger">DRIVER Nauka Jazdy - Wschowa</p>
+                                <p class="info"><strong>(SALA WYKŁADOWA, BIURO)</strong></p>
+                                <p class="info">
+                                    ul. Pocztowa 10
+                                   
+                                    <br>
+                                    67-400 Wschowa
+                                </p>
+                                <p class="title text-danger">Biuro otwarte w każdy wtorek i czwartek od godziny 17.30 do 19.00</p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2467.024410185287!2d16.314545815896164!3d51.80571459666842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47059369775f57d7%3A0x8bc82fd914e68ec5!2sDriver%20Nauka%20Jazdy!5e0!3m2!1spl!2spl!4v1578684963275!5m2!1spl!2spl" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                                <p class="title text-danger text-center">Osoby kontaktowe</p>
+                                <p class="info text-center">
+                                    Szymon Mazurek
+                                    <br>
+                                    tel. <ins>667 905 322</ins>
+                                    <br>
+                                    email: <a href="mailto:sz.mazurek@wp.pl" class="text-danger">sz.mazurek@wp.pl</a>
+                                </p>
+                        </div>
+                        <div class="col-lg-6 col-md-12 text-center">
+                            <p class="title text-danger">Formularz kotaktowy</p>
+                            <form action="">
+                                <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
+                                <br>
+                                <input type="tel" name="phone" placeholder="Nr telefonu" class="form-control">
+                                <br>
+                                <input type="email" name="email" placeholder="Adres email" class="form-control">
+                                <br>
+                                <input type="text" name="title" placeholder="Temat wiadomości" class="form-control">
+                                <br>
+                                <textarea placeholder="Treść wiadomości" id="textarea" name="message" class="form-control"></textarea>
+                                <br>
+                                <div class="d-inline">
+                                    <input type="submit" value="Wyślij wiadomość" class="btn btn-outline-danger">
+                                    <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#contact").addClass("active");
+</script>
+<%- include("partials/footer") %>

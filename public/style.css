@@ -1,0 +1,72 @@
+body,html {
+    
+    background: linear-gradient(#262627, #383737, #5a5959 );
+}
+.bg-gradient {
+    background: linear-gradient(#131314, #961c1c);
+}
+.nav-link{
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+}
+
+#name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+}
+.school {
+    font-family: 'Nunito', sans-serif;
+    font-size: 25px;
+    color: grey;
+    font-weight: 700;
+}
+.info {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+}
+
+.title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+.toyota {
+    font-family: 'Nunito', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+.logo {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+}
+input[type=text],
+input[type=tel],
+input[type=email] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    color: black;
+    font-family: 'Nunito', sans-serif;
+}
+
+input[type=text]::placeholder,
+input[type=tel]::placeholder,
+input[type=email]::placeholder {
+    color: black;
+    font-family: 'Nunito', sans-serif;
+}
+
+#textarea::placeholder {
+    
+    color: black;
+    font-family: 'Nunito', sans-serif;
+}
+
+#textarea {
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    color: black;
+    font-family: 'Nunito', sans-serif;
+}

@@ -78,6 +78,10 @@
 </div>
 <script>
     $("#offer").addClass("active");
-    $("#offer").css("border-bottom", "1px solid white")
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $("#offer").css("text-decoration", "underline");
+    } else {
+        $("#offer").css("border-bottom", "1px solid white");
+    }
 </script>
 <%- include("partials/footer") %>

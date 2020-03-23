@@ -13,18 +13,19 @@
                             <div class="row text-center">                                
                                 <div class="col-lg-4 col-md-12">
                                     <p class="title text-danger"><i class="fas fa-clock"></i> Najbliższe kursy</p>
-                                    <p class="info"><strong>Głogów</strong>
-                                        <p class="info">21.01.2020 godz. 16:00</p>
-                                        <p class="info">04.02.2020 godz. 16:00</p>
-                                        <p class="info">18.02.2020 godz. 16:00</p>
-                                    </p>
+                                    <p class="footer"><strong>Kliknij w wybrany termin, by się zapisać</strong></p>
+                                    <% if(events.length === 0){ %>
+                                        <div class="alert alert-light">
+                                            Aktualnie z powodu koronawirusa zajęcia są odwołane
+                                        </div>
+                                    <% } else { %>
+                                        <% for(let i=0;i<events.length;i++){ %>
+                                            <a href="/applications/new?event_id=<%= events[i]._id %>" class="info" style="color: black;"><strong><%= events[i].city %></strong>, <%= events[i].date %> o godz. <%= events[i].time %>, kategoria <%= events[i].course.category %></a>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                                <div class="d-md-block d-lg-none">
                                     <br>
-                                    <p class="info"><strong>Wschowa</strong>
-                                        <p class="info">21.01.2020 godz. 17:30</p>
-                                        <p class="info">04.02.2020 godz. 17:30</p>
-                                        <p class="info">18.02.2020 godz. 17:30</p>
-                                    </p>
-                                    <a href="/application" class="btn btn-outline-danger">Zapisz się</a>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <p class="title text-danger"><i class="fas fa-percent"></i> Promocje</p>
@@ -46,11 +47,10 @@
                             </div>
                         <div class="footer text-center">
                             <p>
-                                Driver <script>document.write(new Date().getFullYear())</script>  © Wszelkie prawa zastrzeżone
+                                Driver <script>document.write(new Date().getFullYear())</script>  © Wszelkie prawa zastrzeżone by:
+                                <a href="http://mkdportfolio.pl" target="_blank">MK</a> 
                                 <br>
-                                Pierwotne wykonanie: <a href="http://2om.pl" target="_blank">2om</a>
-                                <br>
-                                Aktualizacja wyglądu: <a href="https://mkdportfolio.herokuapp.com" target="_blank">MK</a> 
+                                 <a href="/login">Panel administracyjny</a> 
                             </p>
                         </div>
                     </div>

@@ -1,0 +1,67 @@
+<%- include("../partials/header") %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background: #eeeeee">
+                <div class="card-title text-center text-danger" id="name">            
+                   Zapisy na kursy
+                    <br>
+                    <span class="school">Z formularza na stronie</span>
+                </div>
+                <div class="card-body">
+                    <% if(applications.length === 0){ %>
+                        <div class="alert alert-info text-center">
+                            Nikt nie zapisał się do tej pory na kurs
+                        </div>
+                    <% } else { %>
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Imię i nazwisko</th>
+                                <th scope="col">Telefon</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Kategoria</th>
+                                <th scope="col">Termin kursu</th>
+                                <th scope="col">Zapisany?</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0;i <applications.length;i++){ %>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><%= applications[i].name %></td>
+                                        <td><%= applications[i].phone %></td>
+                                        <td><%= applications[i].email %></td>
+                                        <td><%= applications[i].course.category %></td>
+                                        <td><%= applications[i].event.city %>, <%= applications[i].event.date %> <%= applications[i].event.time %></td>
+                                        <td>
+                                            <% if(applications[i].isApplicated === false){ %>
+                                                <form action="/application/<%= applications[i]._id %>/accepted" method="post">
+                                                    <input type="submit" value="Zapisany na kurs" class="btn btn-success">
+                                                </form>
+                                            <% } else { %>
+                                                <a href="/application/<%= applications[i]._id %>/delete" class="info text-danger">tak, usuń aplikację</a>
+                                            <% } %>
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                <% } %>
+                              
+                             
+                            </tbody>
+                          </table>
+                       
+                    <% } %>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

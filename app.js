@@ -813,7 +813,7 @@ app.get("/announcements/:id/edit", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./announcements/edit", {currentUser: req.user,event:events,header:"Driver Nauka Jazdy | Edytuj ogłoszenie", announcement: announcement})
+                    res.render("./announcements/edit", {currentUser: req.user,events:events,header:"Driver Nauka Jazdy | Edytuj ogłoszenie", announcement: announcement})
                    
                 }
             })

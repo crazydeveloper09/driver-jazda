@@ -57,16 +57,16 @@
                         </div>
                         <div class="col-lg-6 col-md-12 text-center">
                             <p class="title text-danger">Formularz kotaktowy</p>
-                            <form action="">
+                            <form action="/feedback" method="POST">
                                 <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
                                 <br>
                                 <input type="tel" name="phone" placeholder="Nr telefonu" class="form-control">
                                 <br>
-                                <input type="email" name="email" placeholder="Adres email" class="form-control">
+                                <input type="email" name="from" placeholder="Adres email" class="form-control">
                                 <br>
-                                <input type="text" name="title" placeholder="Temat wiadomości" class="form-control">
+                                <input type="text" name="topic" placeholder="Temat wiadomości" class="form-control">
                                 <br>
-                                <textarea placeholder="Treść wiadomości" id="textarea" name="message" class="form-control"></textarea>
+                                <textarea placeholder="Treść wiadomości" id="textarea" name="text" class="form-control"></textarea>
                                 <br>
                                 <div class="d-inline">
                                     <input type="submit" value="Wyślij wiadomość" class="btn btn-outline-danger">

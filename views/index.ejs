@@ -2,16 +2,47 @@
 <br>
 <br>
 <br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="alert alert-danger">
-                Już trwają zapisy na sezon 2020 kat A, A2, A1, AM. Zapraszamy
+<% if(announcements.length > 0){ %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-info">
+                    <%= announcements[announcements.length-1].text %>
+                    <% if(currentUser){ %>
+                        <a href="/announcements/<%= announcements[announcements.length-1]._id %>/edit" class="btn btn-dark">Edytuj</a>
+                        <a href="/announcements/<%= announcements[announcements.length-1]._id %>/delete" class="btn btn-secondary">Usuń</a>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
-</div>
+        
+<% } %>
+<% if(error.length > 0){ %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            </div>
+        </div>
+    </div>
     
+<% } %>
+<% if(success.length > 0){ %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<% } %>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

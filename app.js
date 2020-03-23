@@ -152,7 +152,7 @@ app.get("/", function(req, res){
                 if(err){
                     console.log(err)
                 } else {
-                    res.render("index", {currentUser: req.user, events: events, header:"Driver Nauka Jazdy | Strona Główna", announcements: announcements});
+                    res.render("index", {currentUser: req.user, header:"Driver Nauka Jazdy | Strona Główna", events: events, announcements: announcements});
                 }
             });
            
@@ -166,7 +166,7 @@ app.get("/about", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("about", {currentUser: req.user, header:"Driver Nauka Jazdy | O nas", events:events});
+            res.render("about", {currentUser: req.user, header:"Driver Nauka Jazdy | O Nas", events:events});
            
         }
     })
@@ -330,7 +330,7 @@ app.get("/gallery/:id/edit/profile", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/editP", {currentUser: req.user, header:"Driver Nauka Jazdy | Galeria | " + gallery.title + " | Edytuj zdjęcie główne", events:events, gallery: gallery});
+                    res.render("./gallery/editP", {currentUser: req.user,header:"Driver Nauka Jazdy | Galeria | " + gallery.title + " | Edytuj zdjęcie główne", events:events, gallery: gallery});
                    
                 }
             })
@@ -355,11 +355,11 @@ app.post("/gallery/:id/edit/profile", upload.single("profile"), function(req, re
 })
 
 app.get("/login", function(req, res){
-    res.render("login", {header:"Driver Nauka Jazdy | Logowanie ",});
+    res.render("login", {header:"Driver Nauka Jazdy | Logowanie"});
 });
 
 app.get("/register", function(req, res){
-    res.render("register", {header:"Driver Nauka Jazdy | Rejestracja ",})
+    res.render("register", {header:"Driver Nauka Jazdy | Rejestracja"})
 });
 
 app.post("/login", passport.authenticate("local", {
@@ -384,7 +384,7 @@ app.post("/register", function(req, res){
         Driver.register(newDriver, req.body.password, function(err, user) {
             if(err) {
                 
-                return res.redirect("/register");
+                return res.render("register");
             } 
             passport.authenticate("local")(req, res, function() {
                 
@@ -400,7 +400,7 @@ app.get("/pkk", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("pkk", {currentUser: req.user,header:"Driver Nauka Jazdy | PKK", events:events});
+            res.render("pkk", {currentUser: req.user, header:"Driver Nauka Jazdy | PKK", events:events});
            
         }
     })
@@ -418,7 +418,7 @@ app.get("/offer/course/:category", function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./courses/show", {currentUser: req.user, header:"Driver Nauka Jazdy | Oferta | Kategoria " + course.category , events:events, course: course});
+                    res.render("./courses/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Oferta | Kategoria " + course.category, events:events, course: course});
                    
                 }
             })
@@ -437,7 +437,7 @@ app.get("/applications/new", function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./applications/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Zapisz się na kurs", events:events, event:event});
+                    res.render("./applications/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Zapisz się na kurs", events:events, event:event});
                    
                 }
             })
@@ -455,7 +455,7 @@ app.get("/applications", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./applications/index", {currentUser: req.user,header:"Driver Nauka Jazdy | Zapisy na kursy",applications:applications, events:events});
+                    res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Zapisy na kurs",applications:applications, events:events});
                    
                 }
             })
@@ -588,7 +588,7 @@ app.get("/courses/new", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("./courses/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Dodaj kurs",events:events});
+            res.render("./courses/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Dodaj kurs", events:events});
            
         }
     })
@@ -619,7 +619,7 @@ app.get("/courses/:id/edit", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./courses/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | PEdytuj kurs", course: course, events:events});
+                    res.render("./courses/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj kurs", course: course, events:events});
                    
                 }
             })
@@ -680,7 +680,7 @@ app.get("/courses/:id/events/:event_id/edit", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./events/edit", {currentUser: req.user, header:"Driver Nauka Jazdy | Edytuj termin",events:events, event:event, course_id: req.params.id});
+                    res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj termin", events:events, event:event, course_id: req.params.id});
                    
                 }
             })
@@ -752,7 +752,7 @@ app.get("/courses/:id/characteristics/:characteristic_id/edit", isLoggedIn, func
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./characteristic/edit", {currentUser: req.user, events:events,header:"Driver Nauka Jazdy | Edytuj cechę charakterystyczną", characteristic:characteristic, course_id: req.params.id});
+                    res.render("./characteristic/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj cechę charakterystyczną", events:events, characteristic:characteristic, course_id: req.params.id});
                    
                 }
             })
@@ -787,7 +787,7 @@ app.get("/announcements/new", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("./announcements/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Dodaj ogłoszenie", events:events});
+            res.render("./announcements/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Dodaj ogłoszenie", events:events});
            
         }
     })
@@ -813,7 +813,7 @@ app.get("/announcements/:id/edit", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./announcements/edit", {currentUser: req.user,event:events, header:"Driver Nauka Jazdy | Edytuj ogłoszenie", announcement: announcement})
+                    res.render("./announcements/edit", {currentUser: req.user,event:events,header:"Driver Nauka Jazdy | Edytuj ogłoszenie", announcement: announcement})
                    
                 }
             })

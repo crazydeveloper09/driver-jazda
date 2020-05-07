@@ -428,6 +428,49 @@ app.get("/offer/course/:category", function(req, res){
     
 });
 
+app.get("/applications/search", isLoggedIn, (req, res) => {
+    const regex = new RegExp(escapeRegex(req.query.name), 'gi');
+    Application.find({name: regex}).populate(["event", "course"]).exec((err, applications) => {
+        if(err){
+            console.log(err);
+        } else {
+            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.render("./applications/search", {events:events,applications: applications, currentUser: req.user, param: req.query.name, header: `Driver Nauka Jazdy | Zapisy na kursy | Wyszukiwanie po parametrze ${req.query.name}`})
+                   
+                }
+            })
+            
+        }
+    })
+})
+
+app.get("/applications/category/:category", isLoggedIn, function(req, res){
+    Course.findOne({category: req.params.category}, (err, course) => {
+        if(err){
+            console.log(err);
+        } else {
+            Application.find({course: course._id}).populate(["event", "course"]).exec((err,applications) => {
+                if(err){
+                    console.log(err);
+                } else {
+                    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            res.render("./applications/category", {events:events,applications: applications, currentUser: req.user, param: req.params.category, header: `Driver Nauka Jazdy | Zapisy na kursy | Wyszukiwanie po parametrze ${req.params.category}`})
+                           
+                        }
+                    })
+                    
+                }
+            })
+        }
+    })
+})
+
 app.get("/applications/new", function(req, res){
     Event.findById(req.query.event_id, function(err, event){
         if(err){
@@ -849,5 +892,9 @@ function isLoggedIn(req, res, next) {
     req.flash("error", "Nie masz dostępu do tej strony");
     res.redirect("/");
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 app.listen(process.env.PORT);

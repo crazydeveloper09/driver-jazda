@@ -81,3 +81,16 @@ input[type=number]::placeholder {
     color: black;
     font-family: 'Nunito', sans-serif;
 }
+
+input[type=search] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #dc3545;
+    color: #dc3545;
+    font-family: 'Nunito', sans-serif;
+}
+
+input[type=search]::placeholder {
+    color: #dc3545;
+    font-family: 'Nunito', sans-serif;
+}

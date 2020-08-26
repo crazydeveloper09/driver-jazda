@@ -1,10 +1,12 @@
 <%- include("../partials/header") %>
 <br>
-<br>
-<br>
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-4 d-md-none d-lg-block" id="side">
+            <%- include("../partials/side") %>
+        </div>
+        <div class="col-lg-8 col-md-12">
                 <div class="card" style="background: #eeeeee">
                         <div class="card-title text-center text-danger" id="name">
                             
@@ -43,11 +45,11 @@
                                <% if(course.category === "B"){ %>
                                     <li class="info">Raty:
                                         <ol>
-                                            <li class="info">200z - wpisowe</li>
-                                            <li class="info">500zł - płatna przed pierwszą jazdą</li>
-                                            <li class="info">500zł - płatna przed 10 godz. jazdy</li>
-                                    
-                                            <li class="info">400zł - płatna przed 20 godz. jazdy</li>
+                                            <li class="info">200zł</li>
+                                            <li class="info">400zł</li>
+                                            <li class="info">500zł</li>
+                                            <li class="info">300zł</li>
+                                            <li class="info">400zł</li>
                                         </ol>
                                     </li>
                                <% } %>
@@ -84,14 +86,15 @@
                            <% if(currentUser){ %>
                             <a href="/courses/<%= course._id %>/edit" class="btn btn-danger">Edytuj kurs</a>
                             <% } %>
-                           	<div class="row justify-content-center">
-								<div class="col-lg-6 col-md-12 text-center">
-									<img src="/image.png" class="rounded">
-								</div>
-								<div class="col-lg-6 col-md-12 text-center">
-									<img src="/elka.png" class="rounded">
-								</div>
-							</div>
+                           <br>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-12 text-center">
+                                    <img src="/image.png" class="rounded">
+                                </div>
+                                <div class="col-lg-6 col-md-12 text-center">
+                                    <img src="/elka.png" class="rounded">
+                                </div>
+                            </div>
                         </div>
                     </div>
         </div>

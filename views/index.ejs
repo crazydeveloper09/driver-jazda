@@ -1,7 +1,6 @@
 <%- include("partials/header") %>
 <br>
-<br>
-<br>
+
 <% if(announcements.length > 0){ %>
     <div class="container">
         <div class="row">
@@ -45,7 +44,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-4 d-md-none d-lg-block" id="side">
+                <%- include("partials/side") %>
+            </div>
+            <div class="col-lg-8 col-md-12">
                 <div class="card" style="background: #eeeeee">
                     <div class="card-title text-center text-danger" id="name">
                         
@@ -119,21 +121,19 @@
                             <li class="info">przyjeżdżamy do Naszych Kursantów.</li>
                         </ul> 
                         <p class="title text-danger">Każdy kursant przed rozpoczęciem kursu musi wyrobić profil kandydata na kierowcę tj. PKK. Więcej informacji w dziale PKK.</p>
-
+                        <br>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-12 text-center">
+                                <img src="/stop.png" height="150" width="150" class="rounded">
+                            </div>
+                            <div class="col-lg-6 col-md-12 text-center">
+                                <img src="/rondo.png" height="150" width="150" class="rounded">
+                            </div>
+                        </div>
                     </div>
-					<div class="row justify-content-center">
-						<div class="col-lg-6 col-md-12 text-center">
-							<img src="/stop.png" height="150" width="150" class="rounded">
-						</div>
-						<div class="col-lg-6 col-md-12 text-center">
-							<img src="/rondo.png" height="150" width="150" class="rounded">
-						</div>
-					</div>
                 </div>
-				
             </div>
         </div>
-		
     </div>
     <script>
         $("#home").addClass("active");

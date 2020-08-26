@@ -1,0 +1,60 @@
+<div class="card" style="border:none;background: #eeeeee">
+    <div class="card-title sidebar">
+        <p class="side-title"> <i class="fas fa-clock"></i> Najbliższe kursy</p>
+    </div>
+    <div class="card-body">
+        <p class="footer"><strong>Kliknij w wybrany termin, by się zapisać</strong></p>
+        <% if(events.length === 0){ %>
+            <div class="alert alert-light">
+                Aktualnie z powodu koronawirusa zajęcia są odwołane
+            </div>
+        <% } else { %>
+            <% for(let i=0;i<events.length;i++){ %>
+            <a href="/applications/new?event_id=<%= events[i]._id %>" class="info"
+                style="color: black;"><strong><%= events[i].city %></strong>, <%= events[i].date %> o godz. <%= events[i].time %>,
+                kategoria <%= events[i].course.category %></a>
+            <% } %>
+        <% } %>
+    </div>
+</div>
+<br>
+<div class="card" style="border:none;background: #eeeeee">
+    <div class="card-title sidebar">
+        <p class="side-title"> <i class="fas fa-percent"></i> Promocje</p>
+    </div>
+    <div class="card-body">
+        <p class="info">Kategoria B - <span><strong><ins>1600zł</ins></strong></span></p>
+        <p class="info">Kategoria A- <span><strong><ins>1200zł</ins></strong></span></p>
+        <p class="info">Kategoria A1 - <span><strong><ins>1100zł</ins></strong></span></p>
+        <p class="info">Kategoria A2 - <span><strong><ins>1200zł</ins></strong></span></p>
+        <p class="info">Kategoria AM - <span><strong><ins>350zł</ins></strong></span></p>
+    </div>
+</div>
+<br>
+<div class="card" style="border:none;background: #eeeeee">
+    <div class="card-title sidebar">
+        <p class="side-title"> <i class="fas fa-link"></i> Polecane linki</p>
+    </div>
+    <div class="card-body">
+       <ul class="info">
+            <li>
+                <a href= "http://www.zgora.wordy.pl/" target="_blank" style="color: #212529">WORD Zielona Góra</a>
+            </li>
+            <li>
+                <a href= "http://www.word.leszno.pl/" target="_blank" style="color: #212529">WORD Leszno</a>
+            </li>
+            <li>
+                <a href= "http://www2.word-legnica.pl/" target="_blank" style="color: #212529">WORD Legnica</a>
+            </li>
+            <li>
+                <a href= "https://e-testynaprawojazdy.pl/" target="_blank" style="color: #212529">Testy online</a>
+            </li>
+            <li>
+                <a href= "http://kodeks-drogowy.org/" target="_blank" style="color: #212529">Kodeks drogowy</a>
+            </li>
+            <li>
+                <a href= "https://info-car.pl/infocar/prawo-jazdy/sprawdz-status.html" target="_blank" style="color: #212529">Sprawdź, czy wszystko gotowe</a>
+            </li>
+       </ul>
+    </div>
+</div>

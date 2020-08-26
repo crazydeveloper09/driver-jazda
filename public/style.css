@@ -1,9 +1,9 @@
 body,html {
     
-    background: linear-gradient(#262627, #383737, #5a5959);
+    background: linear-gradient(#121213,#8a8a8a);
 }
 .bg-gradient {
-    background: linear-gradient(#131314, #961c1c);
+    background: linear-gradient(rgb(166, 3, 40), #131314);
 }
 .nav-link{
     font-family: 'Nunito', sans-serif;
@@ -36,6 +36,14 @@ body,html {
     font-size: 22px;
     font-weight: 700;
 }
+.side-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    padding: 12px;
+    margin-bottom: 0;
+}
 .toyota {
     font-family: 'Nunito', sans-serif;
     font-size: 25px;
@@ -58,7 +66,9 @@ input[type=date] {
     color: black;
     font-family: 'Nunito', sans-serif;
 }
-
+.sidebar {
+    background: linear-gradient(#131314, rgb(166, 3, 40))
+}
 input[type=text]::placeholder,
 input[type=tel]::placeholder,
 input[type=email]::placeholder,
@@ -81,7 +91,13 @@ input[type=number]::placeholder {
     color: black;
     font-family: 'Nunito', sans-serif;
 }
-
+.card {
+    background: #eeeeee;
+    
+}
+#side {
+    display: block;
+}
 input[type=search] {
     background: none;
     border: none;
@@ -93,4 +109,16 @@ input[type=search] {
 input[type=search]::placeholder {
     color: #dc3545;
     font-family: 'Nunito', sans-serif;
+}
+
+@media (max-width: 992px) {
+    .bg-gradient {
+        background: linear-gradient(#131314, rgb(166, 3, 40));
+    }
+    .navbar {
+        position: fixed;
+    }
+    #side {
+        display: none;
+    }
 }

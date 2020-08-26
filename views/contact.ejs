@@ -1,19 +1,22 @@
 <%- include("partials/header") %>
 <br>
-<br>
-<br>
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-4 d-md-none d-lg-block" id="side">
+            <%- include("partials/side") %>
+        </div>
+        <div class="col-lg-8 col-md-12">
             <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name">                            
+                <div class="card-title text-center text-danger" id="name">
+                                               
                     Kontakt
                     <br>
                     <span class="school">Jak do nas dotrzeć?</span>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 col-md-12 text-center">
+                        <div class="col-lg-12 text-center" style="margin-top: 11px">
                             <p class="title text-danger">DRIVER Nauka Jazdy Głogów</p>
                             <p class="info"><strong>(SALA WYKŁADOWA, BIURO)</strong></p>
                             <p class="info">
@@ -33,7 +36,8 @@
                             
                             
                         </div>
-                        <div class="col-lg-6 col-md-12 text-center">
+                        
+                        <div class="col-lg-12 text-center" style="margin-top: 11px">
                                 <p class="title text-danger">DRIVER Nauka Jazdy - Wschowa</p>
                                 <p class="info"><strong>(SALA WYKŁADOWA, BIURO)</strong></p>
                                 <p class="info">
@@ -45,7 +49,8 @@
                                 <p class="title text-danger">Biuro otwarte w każdy wtorek i czwartek od godziny 17.30 do 19.00</p>
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2467.024410185287!2d16.314545815896164!3d51.80571459666842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47059369775f57d7%3A0x8bc82fd914e68ec5!2sDriver%20Nauka%20Jazdy!5e0!3m2!1spl!2spl!4v1578684963275!5m2!1spl!2spl" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        
+                        <div class="col-lg-12" style="margin-top: 11px">
                                 <p class="title text-danger text-center">Osoby kontaktowe</p>
                                 <p class="info text-center">
                                     Szymon Mazurek
@@ -55,7 +60,8 @@
                                     email: <a href="mailto:sz.mazurek@wp.pl" class="text-danger">sz.mazurek@wp.pl</a>
                                 </p>
                         </div>
-                        <div class="col-lg-6 col-md-12 text-center">
+                        
+                        <div class="col-lg-12 text-center" style="margin-top: 11px">
                             <p class="title text-danger">Formularz kotaktowy</p>
                             <form action="/feedback" method="POST">
                                 <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
@@ -68,22 +74,27 @@
                                 <br>
                                 <textarea placeholder="Treść wiadomości" id="textarea" name="text" class="form-control"></textarea>
                                 <br>
-                                <div class="d-inline">
+                                <div class="d-inline" style="margin-bottom: 11px;">
                                     <input type="submit" value="Wyślij wiadomość" class="btn btn-outline-danger">
                                     <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
+                                   
                                 </div>
                             </form>
                         </div>
+                        
+                            
+                        
+							
 						
                     </div>
-                    <div class="row justify-content-center">
-							<div class="col-md-6 text-center">
-								<img src="/1.png" height="200" width="200" class="rounded">
-							</div>
-							<div class="col-md-6 text-center">
-								<img src="/2.png"  height="200" width="200" class="rounded">
-							</div>
-						</div>
+                    <div class="row" style="margin-top:11px;">
+                        <div class="col-md-6 text-center">
+                            <img src="/1.png" height="200" width="200" class="rounded">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src="/2.png"  height="200" width="200" class="rounded">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

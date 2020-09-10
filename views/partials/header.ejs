@@ -5,7 +5,9 @@
 <head>
 	<title> <%= header %> </title>
 
-
+    <meta name="description" content="DRIVER Nauka Jazdy - Szkoła nauki jazdy DRIVER w Głogowie i we Wschowie. Przeprowadzamy kursy na prawo jazdy w kategoriach B. na w terenie Głogowa, Wschowy i w ich okolicach.">
+    <meta name="keywords" content="prawo jazdy, głogów, wschowa, prawo jazdy głogów, prawo jazdy wschowa, szkoła nauki jazdy głogów, szkoła nauki jazdy wschowa, nauka jazdy głogów, nauka jazdy wschowa, nauka jazdy, szkoła jazdy, szkoła nauki jazdy, nauka jazdy driver, driver">
+    
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
     <meta charset="utf-8">
@@ -32,7 +34,7 @@
                     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
         <div class="container">
-            <a class="navbar-brand logo d-lg-none d-md-inline-block" href="/"><img src="/logo.png" height="35" alt=""></a>
+            <a class="navbar-brand logo d-lg-none d-md-inline-block" href="/home"><img src="/logo.png" height="35" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,7 +42,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/" id="home">Strona Główna</a>
+                        <a class="nav-link" href="/home" id="home">Strona Główna</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/about" id="about">O nas</a>
@@ -54,10 +56,9 @@
                               
 
                                 <a class="dropdown-item" href="/offer/course/B">Kategoria B</a>
-                                <a class="dropdown-item" href="/offer/course/A">Kategoria A</a>
+                                
                                 <a class="dropdown-item" href="/offer/course/AM">Kategoria AM</a>
-                                <a class="dropdown-item" href="/offer/course/A1">Kategoria A1</a>
-                                <a class="dropdown-item" href="/offer/course/A2">Kategoria A2</a>
+                                
                                 
                             </div>
                         </div>
@@ -86,6 +87,9 @@
                                 <a class="dropdown-item" href= "https://info-car.pl/infocar/prawo-jazdy/sprawdz-status.html" target="_blank">Sprawdź, czy wszystko gotowe</a>
                             </div>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://motocykle-driver.herokuapp.com" id="pkk">Motocykle</a>
                     </li>
                     <% if(typeof currentUser !== 'undefined'){ %>
                         <li class="nav-item">

@@ -8,19 +8,19 @@
             <div class="card" style="background: #eeeeee">
                 <div class="card-title text-center text-danger" id="name"> 
                     <br>                           
-                   Dodaj cechę charakterystyczną
+                   Edytuj cechę charakterystyczną
                    
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
                             <div class="col-lg-12">
                                     
-                                    <form action="/courses/<%= course_id %>/characteristics" method="post">
-                                        <textarea name="text" id="textarea" placeholder="Tekst cechy charakerystycznej" class="form-control"></textarea>
+                                    <form action="/courses/<%= course_id %>/characteristics/<%= characteristic._id %>?_method=PUT" method="post">
+                                        <textarea name="characteristic[text]" id="textarea" placeholder="Tekst cechy charakerystycznej" class="form-control"><%= characteristic.text %></textarea>
                                         <br>
                                         
                                         <div class="d-inline">
-                                            <input type="submit" value="Dodaj cechę charakterystyczną" class="btn btn-outline-danger">
+                                            <input type="submit" value="Edytuj cechę charakterystyczną" class="btn btn-outline-danger">
                                             <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
                                         </div>
                                     </form>

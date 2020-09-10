@@ -33,7 +33,8 @@ const courseSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref:"Event"
         }
-    ]
+    ],
+    type: String
 });
 
 let Course = mongoose.model("Course", courseSchema);
@@ -48,7 +49,8 @@ let Characteristic = mongoose.model("Characteristic", characteristicSchema);
 const gallerySchema = new mongoose.Schema({
     title: String,
     profile: String,
-    pictures:Array
+    pictures:Array,
+    type: String
 })
 
 let Gallery = mongoose.model("Gallery", gallerySchema)
@@ -84,7 +86,8 @@ const eventSchema = new mongoose.Schema({
     course: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Course"
-    }
+    },
+    type: String
 });
 
 let Event = mongoose.model("Event", eventSchema);
@@ -140,11 +143,31 @@ passport.use(new LocalStrategy(Driver.authenticate()));
 passport.serializeUser(Driver.serializeUser());
 passport.deserializeUser(Driver.deserializeUser());
 
-
+function update(){
+    let categories = "AM";
+    Course.findOne({category: categories}, (err, course) => {
+        
+            course.type = "car";
+            course.save();
+        
+    })
+    let title = "Galeria naszych aut";
+    Gallery.findOne({title: title}, (err,gallery) => {
+        
+        gallery.type = 'car';
+        gallery.save();
+    })
+}
 
 
 app.get("/", function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+   
+    res.render("landing", { header:"Driver Nauka Jazdy | Samochody | Przywitanie"});
+               
+   
+})
+app.get("/home", (req, res) => {
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
@@ -152,21 +175,20 @@ app.get("/", function(req, res){
                 if(err){
                     console.log(err)
                 } else {
-                    res.render("index", {currentUser: req.user, header:"Driver Nauka Jazdy | Strona Główna", events: events, announcements: announcements});
+                    update();
+                    res.render("index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Strona Główna", events: events, announcements: announcements});
                 }
             });
            
         }
     })
-   
 })
-
 app.get("/about", function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("about", {currentUser: req.user, header:"Driver Nauka Jazdy | O Nas", events:events});
+            res.render("about", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | O Nas", events:events});
            
         }
     })
@@ -174,11 +196,11 @@ app.get("/about", function(req, res){
 })
 
 app.get("/contact", function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("contact", {currentUser: req.user, header:"Driver Nauka Jazdy | Kontakt", events:events});
+            res.render("contact", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Kontakt", events:events});
            
         }
     })
@@ -186,15 +208,15 @@ app.get("/contact", function(req, res){
 })
 
 app.get("/gallery", function(req, res){
-    Gallery.find({}, function(err, galleries){
+    Gallery.find({$and:[{$or:[{type:'car'}, {type:'all'}]}]}, function(err, galleries){
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/index", {currentUser: req.user,header:"Driver Nauka Jazdy | Galeria", events:events, galleries: galleries});
+                    res.render("./gallery/index", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Galeria", events:events, galleries: galleries});
                    
                 }
             })
@@ -208,11 +230,11 @@ app.get("/gallery", function(req, res){
 
 
 app.get("/gallery/new", isLoggedIn, function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("./gallery/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Dodaj galerię", events:events});
+            res.render("./gallery/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Dodaj galerię", events:events});
            
         }
     })
@@ -224,11 +246,11 @@ app.get("/gallery/:id", function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/show", {currentUser: req.user, header:"Driver Nauka Jazdy | Galeria | " + gallery.title, events:events, gallery: gallery});
+                    res.render("./gallery/show", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Galeria | " + gallery.title, events:events, gallery: gallery});
                    
                 }
             })
@@ -239,7 +261,7 @@ app.get("/gallery/:id", function(req, res){
 
 app.post("/gallery", upload.single("profile"), function(req, res){
     cloudinary.uploader.upload(req.file.path, function(result) {
-        Gallery.create({title: req.body.title, profile:result.secure_url, pictures:[]}, function(err,createdGallery){
+        Gallery.create({title: req.body.title, profile:result.secure_url, pictures:[], type: req.body.type}, function(err,createdGallery){
             if(err){
                 console.log(err);
             } else {
@@ -255,11 +277,11 @@ app.get("/gallery/:id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/edit", {currentUser: req.user, header:"Driver Nauka Jazdy | Galeria | " + gallery.title + " | Edytuj tytuł",gallery: gallery, events:events});
+                    res.render("./gallery/edit", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Galeria | " + gallery.title + " | Edytuj tytuł",gallery: gallery, events:events});
                    
                 }
             })
@@ -293,11 +315,11 @@ app.get("/gallery/:id/add/picture", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/addP", {currentUser: req.user,header:"Driver Nauka Jazdy | Galeria | " + gallery.title + " | Dodaj zdjęcie", events:events, gallery: gallery});
+                    res.render("./gallery/addP", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Galeria | " + gallery.title + " | Dodaj zdjęcie", events:events, gallery: gallery});
                    
                 }
             })
@@ -326,11 +348,11 @@ app.get("/gallery/:id/edit/profile", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./gallery/editP", {currentUser: req.user,header:"Driver Nauka Jazdy | Galeria | " + gallery.title + " | Edytuj zdjęcie główne", events:events, gallery: gallery});
+                    res.render("./gallery/editP", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Galeria | " + gallery.title + " | Edytuj zdjęcie główne", events:events, gallery: gallery});
                    
                 }
             })
@@ -355,11 +377,11 @@ app.post("/gallery/:id/edit/profile", upload.single("profile"), function(req, re
 })
 
 app.get("/login", function(req, res){
-    res.render("login", {header:"Driver Nauka Jazdy | Logowanie"});
+    res.render("login", {header:"Driver Nauka Jazdy | Samochody | Logowanie"});
 });
 
 app.get("/register", function(req, res){
-    res.render("register", {header:"Driver Nauka Jazdy | Rejestracja"})
+    res.render("register", {header:"Driver Nauka Jazdy | Samochody | Rejestracja"})
 });
 
 app.post("/login", passport.authenticate("local", {
@@ -396,11 +418,11 @@ app.post("/register", function(req, res){
 
 
 app.get("/pkk", function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("pkk", {currentUser: req.user, header:"Driver Nauka Jazdy | PKK", events:events});
+            res.render("pkk", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | PKK", events:events});
            
         }
     })
@@ -414,11 +436,11 @@ app.get("/offer/course/:category", function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./courses/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Oferta | Kategoria " + course.category, events:events, course: course});
+                    res.render("./courses/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Oferta | Kategoria " + course.category, events:events, course: course});
                    
                 }
             })
@@ -434,11 +456,11 @@ app.get("/applications/search", isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./applications/search", {events:events,applications: applications, currentUser: req.user, param: req.query.name, header: `Driver Nauka Jazdy | Zapisy na kursy | Wyszukiwanie po parametrze ${req.query.name}`})
+                    res.render("./applications/search", {events:events,applications: applications, currentUser: req.user, param: req.query.name, header: `Driver Nauka Jazdy | Samochody | Zapisy na kursy | Wyszukiwanie po parametrze ${req.query.name}`})
                    
                 }
             })
@@ -456,11 +478,11 @@ app.get("/applications/category/:category", isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+                    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                         if(err){
                             console.log(err);
                         } else {
-                            res.render("./applications/category", {events:events,applications: applications, currentUser: req.user, param: req.params.category, header: `Driver Nauka Jazdy | Zapisy na kursy | Wyszukiwanie po parametrze ${req.params.category}`})
+                            res.render("./applications/category", {events:events,applications: applications, currentUser: req.user, param: req.params.category, header: `Driver Nauka Jazdy | Samochody | Zapisy na kursy | Wyszukiwanie po parametrze ${req.params.category}`})
                            
                         }
                     })
@@ -476,11 +498,11 @@ app.get("/applications/new", function(req, res){
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./applications/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Zapisz się na kurs", events:events, event:event});
+                    res.render("./applications/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Zapisz się na kurs", events:events, event:event});
                    
                 }
             })
@@ -494,11 +516,11 @@ app.get("/applications", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Zapisy na kurs",applications:applications, events:events});
+                    res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Zapisy na kurs",applications:applications, events:events});
                    
                 }
             })
@@ -522,6 +544,38 @@ app.post("/applications", function(req, res){
                 if(err){
                     console.log(err);
                 } else {
+                    async function sendMail(application) {
+                        let smtpTransport = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                    type: "OAuth2",
+                                    user: 'driverjazdapl@gmail.com',
+                                    clientId: process.env.CLIENT_ID,
+                                    clientSecret: process.env.CLIENT_SECRET,
+                                    refreshToken: process.env.REFRESH_TOKEN
+                                    
+                                    
+                                
+                               
+                            }
+                        });
+                        let mailOptions = {
+                            to: application.email,
+                            from: 'Driver jazda',
+                            subject: "Potwierdzenie zapisu na kurs prawa jazdy kategorii " + application.course.category,
+                            text: 'Witaj ' + application.name + ', \n\n' + 
+                            'Właśnie zapisaliśmy Cię na kurs prawa jazdy kategorii ' + application.course.category +
+                            '. Prosimy przyjdź ' + application.event.date + ' o ' + application.event.time + 
+                            ' do biura w miejscowości ' + application.event.city + ' z numerem PKK, żebyśmy mogli dokończyć procedurę zapisu.' +
+                            ' Dostaniesz wtedy również dodatkowe materiały np. płytę z pytaniami do egzaminu.' + '\n\n' +
+                            'Pozdrawiamy,' + '\n' + 'Zespół Driver jazda'  
+                        };
+                        smtpTransport.sendMail(mailOptions, function(err){
+                            req.flash("success", "Email został wysłany na adres " + application.email);
+                            done(err, 'done');
+                        });
+                    }
+                    sendMail(createdApplication);
                     createdApplication.event = event._id;
                     createdApplication.course = event.course;
                     createdApplication.save();
@@ -573,65 +627,29 @@ app.get("/application/:id/delete", isLoggedIn, function(req, res){
 });
 
 app.post("/application/:id/accepted", isLoggedIn, function(req, res, next){
-    async.waterfall([
     
-        function(done){
             Application.findById(req.params.id).populate(["course", "event"]).exec(function(err, application){
                 if(!application){
                     req.flash('error', 'Nie znaleźliśmy takiej aplikacji. Spróbuj ponownie');
                     return res.redirect("/applications");
                 }
-               application.isApplicated = true;
-                application.save(function(err){
-                    done(err, application);
-                });
+                application.isApplicated = true;
+                application.save();
+                res.redirect('/applications');
             });
-        },
-        function(application, done) {
-            let smtpTransport = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                        type: "OAuth2",
-                        user: 'driverjazdapl@gmail.com',
-                        clientId: process.env.CLIENT_ID,
-                        clientSecret: process.env.CLIENT_SECRET,
-                        refreshToken: process.env.REFRESH_TOKEN
-                        
-                        
-                    
-                   
-                }
-            });
-            let mailOptions = {
-                to: application.email,
-                from: 'Driver jazda',
-                subject: "Potwierdzenie zapisu na kurs prawa jazdy kategorii " + application.course.category,
-                text: 'Witaj ' + application.name + ', \n\n' + 
-                'Właśnie zapisaliśmy Cię na kurs prawa jazdy kategorii ' + application.course.category +
-                '. Prosimy przyjdź ' + application.event.date + ' o ' + application.event.time + 
-                ' do biura w miejscowości ' + application.event.city + ' z numerem PKK, żebyśmy mogli dokończyć procedurę zapisu.' +
-                ' Dostaniesz wtedy również dodatkowe materiały np. płytę z pytaniami do egzaminu.' + '\n\n' +
-                'Pozdrawiamy,' + '\n' + 'Zespół Driver jazda'  
-            };
-            smtpTransport.sendMail(mailOptions, function(err){
-                req.flash("success", "Email został wysłany na adres " + application.email);
-                done(err, 'done');
-            });
-        }
-    ], function(err){
-        if(err) return next(err);
-        res.redirect('/applications');
-    });
+       
+        
+   
 });
 
 
 
 app.get("/courses/new", isLoggedIn, function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("./courses/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Dodaj kurs", events:events});
+            res.render("./courses/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj kurs", events:events});
            
         }
     })
@@ -642,7 +660,8 @@ app.post("/courses", isLoggedIn, function(req, res){
     let newCourse = new Course({
         category: req.body.category, 
         price: req.body.price, 
-        additionalPrice: req.body.additionalPrice 
+        additionalPrice: req.body.additionalPrice,
+        type: 'car' 
     })
     Course.create(newCourse, function(err, createdCourse){
         if(err){
@@ -658,11 +677,11 @@ app.get("/courses/:id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err); 
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./courses/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj kurs", course: course, events:events});
+                    res.render("./courses/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj kurs", course: course, events:events});
                    
                 }
             })
@@ -682,11 +701,11 @@ app.put("/course/:id", isLoggedIn, function(req, res){
 });
 
 app.get("/courses/:id/events/new", isLoggedIn, function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Dodaj termin", events:events, course_id: req.params.id});
+            res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", events:events, course_id: req.params.id});
            
         }
     })
@@ -694,7 +713,7 @@ app.get("/courses/:id/events/new", isLoggedIn, function(req, res){
 })
 
 app.post("/courses/:id/events", isLoggedIn, function(req, res){
-    Event.create({ city: req.body.city, time: req.body.time, date: req.body.date}, function(err, event){
+    Event.create({ city: req.body.city, time: req.body.time, date: req.body.date, type: 'car'}, function(err, event){
         if(err){
             console.log(err);
         } else {
@@ -719,11 +738,11 @@ app.get("/courses/:id/events/:event_id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj termin", events:events, event:event, course_id: req.params.id});
+                    res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj termin", events:events, event:event, course_id: req.params.id});
                    
                 }
             })
@@ -755,11 +774,11 @@ app.get("/courses/:id/events/:event_id/delete", isLoggedIn, function(req, res){
 
 
 app.get("/courses/:id/characteristics/new", isLoggedIn, function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("./characteristic/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Dodaj cechę charakterystyczną", course_id: req.params.id, events:events});
+            res.render("./characteristic/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj cechę charakterystyczną", course_id: req.params.id, events:events});
            
         }
     })
@@ -791,11 +810,11 @@ app.get("/courses/:id/characteristics/:characteristic_id/edit", isLoggedIn, func
         if(err){
             console.log(err);
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./characteristic/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Edytuj cechę charakterystyczną", events:events, characteristic:characteristic, course_id: req.params.id});
+                    res.render("./characteristic/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj cechę charakterystyczną", events:events, characteristic:characteristic, course_id: req.params.id});
                    
                 }
             })
@@ -826,11 +845,11 @@ app.get("/courses/:id/characteristics/:characteristic_id/delete", isLoggedIn, fu
 })
 
 app.get("/announcements/new", isLoggedIn, function(req, res){
-    Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+    Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
         if(err){
             console.log(err);
         } else {
-            res.render("./announcements/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Dodaj ogłoszenie", events:events});
+            res.render("./announcements/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Dodaj ogłoszenie", events:events});
            
         }
     })
@@ -852,11 +871,11 @@ app.get("/announcements/:id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            Event.find({}).populate("course").sort({date: 1}).exec(function(err, events){
+            Event.find({type: 'car'}).populate("course").sort({date: 1}).exec(function(err, events){
                 if(err){
                     console.log(err);
                 } else {
-                    res.render("./announcements/edit", {currentUser: req.user,events:events,header:"Driver Nauka Jazdy | Edytuj ogłoszenie", announcement: announcement})
+                    res.render("./announcements/edit", {currentUser: req.user,events:events,header:"Driver Nauka Jazdy | Samochody | Edytuj ogłoszenie", announcement: announcement})
                    
                 }
             })

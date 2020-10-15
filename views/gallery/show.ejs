@@ -44,7 +44,11 @@
                         <div class="row">
                             <% for(let i=0;i<gallery.pictures.length;i++){ %>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <img src="<%= gallery.pictures[i] %>" alt="" class="img-thumbnail">
+                                    <img src="<%= gallery.pictures[i].link %>" alt="" class="img-thumbnail">
+                                    <% if(currentUser){ %>
+                                        <br>
+                                        <a href="/gallery/pictures/<%= gallery.pictures[i]._id %>/delete" class="info text-danger">Usuń zdjęcie</a>
+                                    <% } %>
                                 </div>
                             <% } %>
                         </div>

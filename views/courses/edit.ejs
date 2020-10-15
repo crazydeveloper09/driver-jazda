@@ -15,7 +15,7 @@
                     <div class="row justify-content-center">
                             <div class="col-lg-12">
                                     
-                                    <form action="/course/<%= course._id %>?_method=PUT" method="post">
+                                    <form action="/courses/<%= course._id %>?_method=PUT" method="post">
                                         
                                         <p class="info">Edytuj kategorię</p>
                                         <input type="text" placeholder="Kategoria" value="<%= course.category %>" name="course[category]" class="form-control">
@@ -25,6 +25,9 @@
                                         <br>
                                         <p class="info">Edytuj cenę dodatkowej godziny</p>
                                         <input type="number" name="course[additionalPrice]" value="<%= course.additionalPrice %>" placeholder="Cena dodatkowej godziny" class="form-control">
+                                        <br>
+                                        <p class="info">Edytuj promocyjną cenę</p>
+                                        <input type="number" name="course[sale]" placeholder="Promocyjna cena" class="form-control">
                                         <br>
                                         
                                         <div class="d-inline">

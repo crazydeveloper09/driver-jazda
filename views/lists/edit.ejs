@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background: #eeeeee">
+                <div class="card-title text-center text-danger" id="name"> 
+                    <br>                           
+                   Edytuj listę na podstronę
+                   
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                    
+                                    <form action="/subpages/<%= subpage_id %>/lists/<%= list._id %>?_method=PUT" method="post">
+                                    
+                                        <p class="info">Edytuj tytuł listy</p>
+                                        <textarea name="list[title]" id="textarea" placeholder="Tytuł listy" class="form-control">
+                                            <%= list.title %>
+                                        </textarea>
+                                        
+                                        <br>
+                                        
+                                        <div class="d-inline">
+                                            <input type="submit" value="Edytuj informację" class="btn btn-outline-danger">
+                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
+                                        </div>
+                                    </form>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

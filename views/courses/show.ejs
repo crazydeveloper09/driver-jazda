@@ -39,17 +39,24 @@
                            <% } %>
                            
                            <span class="title text-danger">Płatności</span>
+                            <% if(currentUser){ %>
+                                <br>
+                                <a href="/courses/<%= course._id %>/installments/new">Dodaj ratę</a>
+                            <% } %>
                            <ul>
                                <li class="info">Regularna cena: <strong><ins><%= course.price %>zł</ins></strong> </li>
                                <li class="info">Dodatkowa godzina: <strong><ins><%= course.additionalPrice %>zł</ins></strong> </li>
-                               <% if(course.category === "B"){ %>
+                               <% if(course.installments.length != 0){ %>
                                     <li class="info">Raty:
                                         <ol>
-                                            <li class="info">200zł</li>
-                                            <li class="info">400zł</li>
-                                            <li class="info">500zł</li>
-                                            <li class="info">300zł</li>
-                                            <li class="info">400zł</li>
+                                            <% course.installments.forEach((installment) => { %>
+                                                <li class="info"><%= installment.amount %>zł</li>
+                                                <% if(currentUser){ %>
+                                                    <a href="/courses/<%= course._id %>/installments/<%= installment._id %>/edit" class="info text-danger" style="font-size: 15px;">Edytuj ratę</a>
+                                                    <a href="/courses/<%= course._id %>/installments/<%= installment._id %>/delete" class="info text-danger" style="font-size: 15px;">Usuń ratę</a>
+                                                <% } %>
+                                            <% }) %>
+                                            
                                         </ol>
                                     </li>
                                <% } %>
@@ -74,6 +81,7 @@
                                                 <%= course.events[i].city %></strong>, <%= course.events[i].date %>, <%= course.events[i].time %>
                                             <a href="/applications/new?event_id=<%= course.events[i]._id %>" class="text-danger">Zapisz się</a>
                                             <% if(currentUser){ %>
+                                                <br>
                                                 <a href="/courses/<%= course._id %>/events/<%= course.events[i]._id %>/delete" class="text-danger">Usuń termin</a>
                                                 <a href="/courses/<%= course._id %>/events/<%= course.events[i]._id %>/edit" class="text-danger">Edytuj termin</a>
                                             <% } %>
@@ -85,15 +93,21 @@
                            <% } %>
                            <% if(currentUser){ %>
                             <a href="/courses/<%= course._id %>/edit" class="btn btn-danger">Edytuj kurs</a>
+                            <a href="/courses/<%= course._id %>/add/picture" class="btn btn-success">Dodaj zdjęcie</a>
                             <% } %>
                            <br>
-                            <div class="row justify-content-center">
-                                <div class="col-lg-6 col-md-12 text-center">
-                                    <img src="/image.png" class="rounded">
-                                </div>
-                                <div class="col-lg-6 col-md-12 text-center">
-                                    <img src="/elka.png" class="rounded">
-                                </div>
+                            <div class="row">
+                                <% course.pictures.forEach((picture) => { %>
+                                    <div class="col-lg-6 col-md-12 text-center">
+                                        <img src="<%= picture.link %>" height="150" width="150" class="rounded">
+                                        <% if(currentUser){ %>
+                                            <br>
+                                            <a href="/gallery/pictures/<%= picture._id %>/delete" class="info text-danger">Usuń zdjęcie</a>
+                                        <% } %>
+                                    </div>
+                                <% }) %>
+                            
+                                
                             </div>
                         </div>
                     </div>

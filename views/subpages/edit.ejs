@@ -1,0 +1,49 @@
+<%- include("../partials/header") %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background: #eeeeee">
+                <div class="card-title text-center text-danger" id="name"> 
+                    <br>                           
+                   Edytuj podstronę <%= subpage.title %>
+                   
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                    
+                                    <form action="/subpages/<%= subpage._id %>?_method=PUT" method="post">
+                                        <p class="info">Edytuj nazwę podstrony</p>
+                                        <input type="text" placeholder="np. Strona Główna" value="<%= subpage.name %>" name="subpage[name]" class="form-control">
+                                        <br>
+                                        <p class="info">Edytuj tytuł podstrony</p>
+                                        <input type="text" placeholder="np. Witamy" value="<%= subpage.title %>" name="subpage[title]" class="form-control">
+                                            
+                                            
+                                      
+                                        <br>
+                                        <p class="info">Edytuj podpis pod tytułem</p>
+                                        <input type="text" name="subpage[more]" placeholder="np. Na naszej stronie" value="<%= subpage.more %>" class="form-control">
+                                        <br>
+                                        <p class="info">Edytuj opis podstrony</p>
+                                        <textarea name="subpage[text]" placeholder="Opis podstrony" id="textarea" class="form-control"><%= subpage.text %></textarea>
+                                        
+                                        <br>
+                                        
+                                        <div class="d-inline">
+                                            <input type="submit" value="Edytuj podstronę" class="btn btn-outline-danger">
+                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
+                                        </div>
+                                    </form>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

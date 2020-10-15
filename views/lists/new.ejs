@@ -1,0 +1,38 @@
+<%- include("../partials/header") %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background: #eeeeee">
+                <div class="card-title text-center text-danger" id="name"> 
+                    <br>                           
+                   Dodaj listę na podstronę
+                   
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                    
+                                    <form action="/subpages/<%= subpage_id %>/lists" method="post">
+                                    
+                                        <p class="info">Wpisz tytuł listy</p>
+                                        <textarea name="title" id="textarea" placeholder="Tytuł listy" class="form-control"></textarea>
+                                        
+                                        <br>
+                                        
+                                        <div class="d-inline">
+                                            <input type="submit" value="Dodaj listę" class="btn btn-outline-danger">
+                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
+                                        </div>
+                                    </form>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

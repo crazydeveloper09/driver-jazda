@@ -13,16 +13,8 @@
                             <div class="row text-center">                                
                                 <div class="col-lg-4 col-md-12">
                                     <p class="title text-danger"><i class="fas fa-clock"></i> Najbliższe kursy</p>
-                                    <p class="footer"><strong>Kliknij w wybrany termin, by się zapisać</strong></p>
-                                    <% if(events.length === 0){ %>
-                                        <div class="alert alert-light">
-                                            Aktualnie z powodu koronawirusa zajęcia są odwołane
-                                        </div>
-                                    <% } else { %>
-                                        <% for(let i=0;i<events.length;i++){ %>
-                                            <a href="/applications/new?event_id=<%= events[i]._id %>" class="info" style="color: black;"><strong><%= events[i].city %></strong>, <%= events[i].date %> o godz. <%= events[i].time %>, kategoria <%= events[i].course.category %></a>
-                                        <% } %>
-                                    <% } %>
+                                    <p class="footer" id="event_info_footer"><strong>Kliknij w wybrany termin, by się zapisać</strong></p>
+                                    
                                 </div>
                                 <div class="d-md-block d-lg-none">
                                     <br>
@@ -57,6 +49,30 @@
         </div>
     </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    
+    axios.get('/api/events')
+        .then((response) => {
+            const eventInfoFooter = document.getElementById("event_info_footer");
+            eventInfoFooter.innerHTML = "<strong>Ładowanie najbliższych kursów</strong>";
+            
+            response.data.forEach((event) => {
+              
+                const a = document.createElement("a");
+                a.setAttribute("href", `/applications/new?event_id=${event._id}`);
+                a.setAttribute("class", "info");
+                a.style.color = "#212529";
+                a.innerHTML = `<br><strong>${event.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
+                eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
+                eventInfoFooter.appendChild(a);
+                
+            })
+            
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+</script>
 </body>
 </html>

@@ -109,7 +109,7 @@
         .then((response) => {
             const rLinksDropdown = document.getElementById("rlinks_dropdown")
             const recommendedLinksSide = document.getElementById("recommended_links_side");
-            recommendedLinksSide.innerText = "Ładowanie polecanych linków";
+            
             if(response.data.length === 0){
                 let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");

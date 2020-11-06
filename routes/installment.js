@@ -17,7 +17,7 @@ router.get("/new", isLoggedIn, function(req, res){
 })
 
 router.post("/", isLoggedIn, function(req, res){
-    Installment.create({ amount: req.body.amount}, function(err, installment){
+    Installment.create({ amount: req.body.amount, description: req.body.description }, function(err, installment){
         if(err){
             console.log(err);
         } else {
@@ -51,7 +51,15 @@ router.put("/:installment_id", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.redirect("back");
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+
+                } else {
+                   
+                    res.redirect("/courses/" + course.category)
+                }
+            })
         }
     });
 });
@@ -61,7 +69,15 @@ router.get("/:installment_id/delete", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            res.redirect("back")
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+
+                } else {
+                   
+                    res.redirect("/courses/" + course.category)
+                }
+            })
         }
         
     })

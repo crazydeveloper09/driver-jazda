@@ -19,9 +19,11 @@
                                         
                                         
                                         <p class="info">Edytuj kwotę raty</p>
-                                        <input type="number" name="amount" placeholder="Kwota raty" value="<%= installment.amount %>" class="form-control">
+                                        <input type="number" name="installment[amount]" placeholder="Kwota raty" value="<%= installment.amount %>" class="form-control">
                                         <br>
-                                        
+                                        <p class="info">Wpisz opis raty</p>
+                                        <input type="text" name="installment[description]" placeholder="Opis raty" value="<%= installment.description %>" class="form-control">
+                                        <br>
                                         <div class="d-inline">
                                             <input type="submit" value="Edytuj ratę" class="btn btn-outline-danger">
                                             <input type="reset" value="Wyczyść" class="btn btn-outline-danger">

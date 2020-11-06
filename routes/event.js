@@ -60,7 +60,15 @@ router.put("/:event_id", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.redirect("back");
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+
+                } else {
+                   
+                    res.redirect("/courses/" + course.category)
+                }
+            })
         }
     });
 });
@@ -70,7 +78,15 @@ router.get("/:event_id/delete", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            res.redirect("back")
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+
+                } else {
+                   
+                    res.redirect("/courses/" + course.category)
+                }
+            })
         }
         
     })

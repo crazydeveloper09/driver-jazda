@@ -49,7 +49,7 @@ router.get("/courses", (req, res) => {
 })
 
 router.get("/driver", (req, res) => {
-    let username = "admin_maciek"
+    let username = "Admin"
     Driver.findOne({username: username}).populate("carOffices").exec((err, driver) => {
         if(err){
             res.json(err);

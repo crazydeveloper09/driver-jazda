@@ -193,6 +193,7 @@
         axios
         .get("/api/driver")
         .then((response) => {
+            const headerOffices = document.getElementById("headerOffices");
             const officesFooter = document.getElementById("offices_footer");
             
             if(response.data.length === 0){
@@ -205,15 +206,18 @@
                
                     response.data.carOffices.forEach((office) => {
                         const p = document.createElement("p")
-                    
+                        const p1 = document.createElement("p")
+                        p1.setAttribute("class", "offices");
                         p.setAttribute("class", "info");
                         if(office.additional){
                             p.innerHTML = `<strong>${office.city}, ul.${office.street}</strong> <br>${office.additional}`;
+                            p1.innerHTML = `${office.city}, ul.${office.street} <br>${office.additional} <br> ${office.what}`
                         } else {
                             p.innerHTML = `<strong>${office.city}, ul.${office.street}</strong>`;
+                            p1.innerHTML = `${office.city}, ul.${office.street} <br> ${office.what}`
                         }
                         
-                    
+                        headerOffices.appendChild(p1)
                         officesFooter.appendChild(p);
                     })
                    
@@ -232,6 +236,14 @@
                 alert.innerText = err;
                 officesFooter.appendChild(alert)
         })
+
+        let website = document.getElementById("website");
+        let infoWebsite = document.getElementById("infoWebsite")
+        console.log(website.innerText)
+        if(website.innerText === "WWW.MOTOCYKLE.DRIVER-JAZDA.PL"){
+            website.style.fontSize = '42px';
+            infoWebsite.style.fontSize = '25px';
+        }
 </script>
 </body>
 </html>

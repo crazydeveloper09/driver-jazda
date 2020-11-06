@@ -52,7 +52,7 @@ router.get("/:id/edit", isLoggedIn, function(req, res){
     })
 });
 
-router.post("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, function(req, res){
     Driver.findByIdAndUpdate(req.params.id, req.body.driver, function(err, updateddriver){
         if(err){
             console.log(err)

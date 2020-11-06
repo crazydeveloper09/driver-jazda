@@ -22,11 +22,30 @@ router.get("/", function(req, res){
                
    
 })
-
+router.get("/home", (req, res) => {
+    
+    Announcement.find({}, function(err, announcements){
+        if(err){
+            console.log(err)
+        } else {
+                    
+            res.render("index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Strona Główna", announcements: announcements});
+        }
+    });
+           
+        
+})
+router.get("/about", function(req, res){
+    
+    res.render("about", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | O Nas"});
+           
+       
+    
+})
 
 router.get("/contact", function(req, res){
     
-    Driver.findOne({username: 'admin_maciek'}).populate(["carOffices", "pictures"]).exec((err, user) => {
+    Driver.findOne({username: 'Admin'}).populate(["carOffices", "pictures"]).exec((err, user) => {
         if(err) {
             console.log(err)
         } else {
@@ -80,6 +99,9 @@ router.post("/register", function(req, res){
    
 
 
+router.get("/pkk", function(req, res){
+    res.render("pkk", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | PKK"});
+})
 
 
 router.post("/feedback", function(req, res, next){

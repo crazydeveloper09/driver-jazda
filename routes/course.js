@@ -46,6 +46,7 @@ router.get("/:category", function(req, res){
         if(err){
             console.log(err)
         } else {
+			console.log(req.params.category)
             res.render("./courses/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Oferta | Kategoria " + course.category, course: course});
         }
     })

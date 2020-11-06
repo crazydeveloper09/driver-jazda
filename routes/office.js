@@ -87,7 +87,7 @@ router.get("/:office_id/edit", isLoggedIn, function(req, res){
     })
 });
 
-router.post("/:office_id", isLoggedIn, function(req, res){
+router.put("/:office_id", isLoggedIn, function(req, res){
     geocoder.geocode(req.body.office.location, function (err, data) {
         if (err || !data.length) {
           req.flash('error', 'Invalid address');

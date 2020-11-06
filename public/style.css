@@ -36,6 +36,10 @@ body,html {
     font-size: 22px;
     font-weight: 700;
 }
+.el {
+    margin-top: 30px;
+    transform: rotate(-5deg);
+}
 .side-title {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
@@ -68,6 +72,25 @@ input[type=date] {
 }
 .sidebar {
     background: linear-gradient(#131314, rgb(166, 3, 40))
+}
+#website {
+    color:white;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+    font-size: 50px;
+}
+#infoWebsite {
+    color:white;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+}
+.offices {
+    color:white;
+    
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    
 }
 input[type=text]::placeholder,
 input[type=tel]::placeholder,

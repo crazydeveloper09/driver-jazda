@@ -49,7 +49,7 @@ router.put("/:link_id", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.redirect("/subpages/strona-główna");
+            res.redirect("/");
         }
     });
 });
@@ -59,7 +59,7 @@ router.get("/:link_id/delete", isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         } else {
-            res.redirect("back")
+            res.redirect("/")
         }
         
     })

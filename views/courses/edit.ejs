@@ -1,46 +1,46 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Edytuj kurs
-                   
-                </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                    
-                                    <form action="/courses/<%= course._id %>?_method=PUT" method="post">
-                                        
-                                        <p class="info">Edytuj kategorię</p>
-                                        <input type="text" placeholder="Kategoria" value="<%= course.category %>" name="course[category]" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj cenę kursu</p>
-                                        <input type="number" name="course[price]" value="<%= course.price %>" placeholder="Cena kursu" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj cenę dodatkowej godziny</p>
-                                        <input type="number" name="course[additionalPrice]" value="<%= course.additionalPrice %>" placeholder="Cena dodatkowej godziny" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj promocyjną cenę</p>
-                                        <input type="number" name="course[sale]" placeholder="Promocyjna cena" class="form-control">
-                                        <br>
-                                        
-                                        <div class="d-inline">
-                                            <input type="submit" value="Edytuj kurs" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 4%">
+            <div id="form1">
+                <a href="/courses/<%= course.category %>">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony kategorii <%= course.category %>
+                </a>
+                <h1 class="login">Edytuj kurs kategorii <%= course.category %></h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
                     </div>
-                </div>
+                <% } %>
+
+
+                <form action="/courses/<%= course._id %>?_method=PUT" method="post">
+
+                    <p class="username">Edytuj kategorię</p>
+                    <input type="text" placeholder="Kategoria" value="<%= course.category %>" name="course[category]"
+                        class="form-control">
+                    <br>
+                    <p class="username">Edytuj cenę kursu</p>
+                    <input type="number" name="course[price]" value="<%= course.price %>" placeholder="Cena kursu"
+                        class="form-control">
+                    <br>
+                    <p class="username">Edytuj cenę dodatkowej godziny</p>
+                    <input type="number" name="course[additionalPrice]" value="<%= course.additionalPrice %>"
+                        placeholder="Cena dodatkowej godziny" class="form-control">
+                    <br>
+                    <p class="username">Edytuj promocyjną cenę</p>
+                    <input type="number" name="course[sale]" placeholder="Promocyjna cena" class="form-control">
+                    <br>
+
+                    <input type="submit" value="Edytuj kurs" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<%- include("../partials/footer") %>
+
+</body>
+</html>

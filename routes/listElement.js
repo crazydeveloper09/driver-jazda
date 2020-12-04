@@ -22,7 +22,12 @@ router.get("/redirect", isLoggedIn, function(req, res){
 })
 
 router.get("/new", isLoggedIn, function(req, res){
-    res.render("./listElements/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj element listy", subpage_id: req.params.subpage_id, list_id: req.params.list_id});
+    List.findById(req.params.list_id, function(err, list) {
+        Subpage.findById(req.params.subpage_id, (err, subpage) => {
+            res.render("./listElements/new", {list: list, currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj element listy", subpage: subpage, list_id: req.params.list_id});
+        })
+    })
+   
 })
 
 router.post("/", isLoggedIn, function(req, res){
@@ -38,6 +43,7 @@ router.post("/", isLoggedIn, function(req, res){
                         console.log(err)
                     } else {
                         listElement.subpage = subpage._id;
+                        listElement.list = list._id;
                         listElement.save()
                         res.redirect(`/subpages/${subpage.address}`);
                     }
@@ -49,11 +55,14 @@ router.post("/", isLoggedIn, function(req, res){
 
 
 router.get("/:listElement_id/edit", isLoggedIn, function(req, res){
-    ListElement.findById(req.params.listElement_id, function(err, listElement){
+    ListElement.findById(req.params.listElement_id).populate("list").exec(function(err, listElement){
         if(err){
             console.log(err);
         } else {
-            res.render("./listElements/edit", {subpage_id: req.params.subpage_id, list_id: req.params.list_id,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj element listy", listElement:listElement});
+            Subpage.findById(req.params.subpage_id, (err, subpage) => {
+                res.render("./listElements/edit", {subpage: subpage, list_id: req.params.list_id,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj element listy", listElement:listElement});
+            })
+           
         }
     })
 });
@@ -63,6 +72,8 @@ router.put("/:listElement_id", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
+            listElement.list = list._id;
+            listElement.save()
             Subpage.findById(req.params.subpage_id, (err, subpage) => {
                 res.redirect(`/subpages/${subpage.address}`);
             })

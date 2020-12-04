@@ -1,54 +1,45 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Edytuj termin do kursu
-                   
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 4%">
+            <div id="form1">
+                <a href="/courses/<%= course.category %>">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony kategorii <%= course.category %>
+                </a>
+                <h1 class="login">Edytuj termin kursu kategorii <%= course.category %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                    
-                                    <form action="/courses/<%= course_id %>/events/<%= event._id %>?_method=PUT" method="post">
-                                        <p class="info">Edytuj miasto</p>
-                                        <select name="event[city]" class="form-control" style="background: none;
-                                        border: none;
-                                        border-bottom: 1px solid black;
-                                        color: black;
-                                        font-family: 'Nunito', sans-serif;">
-                                            <option><%= event.city %></option>
-                                            <option>Edytuj miasto</option>
-                                            <option>Głogów</option>
-                                            <option>Wschowa</option>
-                                           
-                                            
-                                        </select>
-                                        <br>
-                                        
-                                        <p class="info">Edytuj datę</p>
-                                        <input type="date" name="event[date]" value="<%= event.date %>" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj czas</p>
-                                        <input type="time" name="event[time]" value="<%= event.time %>" class="form-control">
-                                        <br>
-                                        
-                                        <div class="d-inline">
-                                            <input type="submit" value="Edytuj termin do kursu" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
-                    </div>
-                </div>
+                <% } %>
+
+                <form action="/courses/<%= course._id %>/events/<%= event._id %>?_method=PUT" method="post">
+                    <p class="username">Edytuj miasto</p>
+                    <select name="event[city]" class="form-control">
+                        <option><%= event.city %></option>
+                        <option>Głogów</option>
+                        <option>Wschowa</option>
+
+
+                    </select>
+                    <br>
+
+                    <p class="info">Edytuj datę</p>
+                    <input type="date" name="event[date]" value="<%= event.date %>" class="form-control">
+                    <br>
+                    <p class="info">Edytuj czas</p>
+                    <input type="time" name="event[time]" value="<%= event.time %>" class="form-control">
+                    <br>
+
+                    <input type="submit" value="Edytuj termin" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<%- include("../partials/footera") %>
+
+</body>
+</html>

@@ -1,53 +1,43 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Dodaj biuro
-                   
-                </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <% if(error.length > 0){ %>
-                                    <div class="alert alert-danger" role="alert">
-                                        <%= error %>
-                                    </div>
-                                <% } %>
-                                    <form action="/driver/<%= driver_id %>/offices" method="post">
-                                        
-                                        <p class="info">Wpisz nazwę biura</p>
-                                        <input type="text" placeholder="Nazwa biura" name="name" class="form-control">
-                                        <br>
-                                        <p class="info">Wpisz informację o godzinach otwarcia</p>
-                                        <input type="text" name="openingHours" placeholder="Informacja o godzinach otwarcia" class="form-control">
-                                        <br>
-                                        <p class="info">Wpisz adres do map Google (adres, kod pocztowy miejscowość)</p>
-                                        <input type="text" name="location" placeholder="Adres do map Google" class="form-control">
-                                        <br>
-                                        <p class="info">Wpisz co się znajduje w biurze</p>
-                                        <input type="text" name="what" placeholder="Co się znajduje w biurze" class="form-control">
-                                        <br>
-                                        <p class="info">Wpisz dodatkową informację jak się wchodzi do biura</p>
-                                        <input type="text" name="additional" placeholder="Dodatkowa informacja" class="form-control">
-                                        <br>
-                                        
-                                        <div class="d-inline">
-                                            <input type="submit" value="Dodaj biuro" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form" style="height: 100%">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 4%">
+            <div id="form1">
+                <a href="/contact">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do podstrony kontakt
+                </a>
+                <h1 class="login">Dodaj biuro</h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
                     </div>
-                </div>
+                <% } %>
+                <form action="/driver/<%= driver_id %>/offices" method="post">
+
+                    <p class="username">Wpisz nazwę biura</p>
+                    <input type="text" placeholder="Nazwa biura" name="name" class="form-control">
+                    <br>
+                    <p class="username">Wpisz informację o godzinach otwarcia</p>
+                    <input type="text" name="openingHours" placeholder="Informacja o godzinach otwarcia"
+                        class="form-control">
+                    <br>
+                    <p class="username">Wpisz adres do map Google (adres, kod pocztowy miejscowość)</p>
+                    <input type="text" name="location" placeholder="Adres do map Google" class="form-control">
+                    <br>
+                    <p class="username">Wpisz co się znajduje w biurze</p>
+                    <input type="text" name="what" placeholder="Co się znajduje w biurze" class="form-control">
+                    <br>
+                    <p class="username">Wpisz dodatkową informację jak się wchodzi do biura</p>
+                    <input type="text" name="additional" placeholder="Dodatkowa informacja" class="form-control">
+                    <br>
+
+                    <input type="submit" value="Dodaj biuro" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<%- include("../partials/footer") %>
+</body>
+</html>

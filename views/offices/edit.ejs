@@ -1,53 +1,52 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Edytuj biuro <%= office.name %>
-                   
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form" style="height: 100%">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 4%">
+            <div id="form1">
+                <a href="/driver/<%= driver_id %>/offices/<%= office._id %>">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do podstrony biura <%= office.name %>
+                </a>
+                <h1 class="login">Edytuj biuro <%= office.name %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                    
-                                    <form action="/driver/<%= driver_id %>/offices/<%= office._id %>?_method=PUT" method="post">
-                                        
-                                        <p class="info">Edytuj nazwę biura</p>
-                                        <input type="text" placeholder="Nazwa biura" value="<%= office.name %>" name="office[name]" class="form-control">
-                                            
-                                            
-                                      
-                                        <br>
-                                        
-                                        <p class="info">Edytuj informację o godzinach otwarcia</p>
-                                        <input type="text" name="office[openingHours]" value="<%= office.openingHours %>" placeholder="Informacja o godzinach otwarcia" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj adres do map Google</p>
-                                        <input type="text" name="office[location]" value="<%= office.location %>" placeholder="Adres do map Google" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj co się znajduje w biurze</p>
-                                        <input type="text" name="office[what]" value="<%= office.what %>" placeholder="Co się znajduje w biurze" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj dodatkową informację jak się wchodzi do biura</p>
-                                        <input type="text" name="office[additional]" value="<%= office.additional %>" placeholder="Dodatkowa informacja" class="form-control">
-                                        <br>
-                                        
-                                        <div class="d-inline">
-                                            <input type="submit" value="Edytuj biuro" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
-                    </div>
-                </div>
+                <% } %>
+
+                <form action="/driver/<%= driver_id %>/offices/<%= office._id %>?_method=PUT" method="post">
+
+                    <p class="username">Edytuj nazwę biura</p>
+                    <input type="text" placeholder="Nazwa biura" value="<%= office.name %>" name="office[name]"
+                        class="form-control">
+
+
+
+                    <br>
+
+                    <p class="username">Edytuj informację o godzinach otwarcia</p>
+                    <input type="text" name="office[openingHours]" value="<%= office.openingHours %>"
+                        placeholder="Informacja o godzinach otwarcia" class="form-control">
+                    <br>
+                    <p class="username">Edytuj adres do map Google</p>
+                    <input type="text" name="office[location]" value="<%= office.location %>"
+                        placeholder="Adres do map Google" class="form-control">
+                    <br>
+                    <p class="username">Edytuj co się znajduje w biurze</p>
+                    <input type="text" name="office[what]" value="<%= office.what %>"
+                        placeholder="Co się znajduje w biurze" class="form-control">
+                    <br>
+                    <p class="username">Edytuj dodatkową informację jak się wchodzi do biura</p>
+                    <input type="text" name="office[additional]" value="<%= office.additional %>"
+                        placeholder="Dodatkowa informacja" class="form-control">
+                    <br>
+
+                    <input type="submit" value="Edytuj biuro" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<%- include("../partials/footer") %>
+</body>
+</html>

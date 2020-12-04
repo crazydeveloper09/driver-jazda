@@ -1,3 +1,4 @@
+
 const express             = require("express"),
     app                   = express(),
     router                = express.Router({mergeParams: true}),
@@ -13,8 +14,15 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 router.get("/new", isLoggedIn, function(req, res){
+    Course.findById(req.params.course_id, function(err, course){
+        if(err){
+            console.log(err)
+
+        } else {
+            res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", course: course});
+        }
+    })
     
-    res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", course_id: req.params.course_id});
            
         
     
@@ -46,8 +54,15 @@ router.get("/:event_id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-           
-            res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj termin", event:event, course_id: req.params.id});
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+        
+                } else {
+                    res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj termin", event:event, course: course});
+                }
+            })
+            
                    
                 
             

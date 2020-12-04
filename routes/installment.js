@@ -13,7 +13,15 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 router.get("/new", isLoggedIn, function(req, res){
-    res.render("./installments/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", course_id: req.params.course_id});
+    Course.findById(req.params.course_id, function(err, course){
+        if(err){
+            console.log(err)
+
+        } else {
+            res.render("./installments/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj ratę", course: course});
+        }
+    })
+    
 })
 
 router.post("/", isLoggedIn, function(req, res){
@@ -41,7 +49,15 @@ router.get("/:installment_id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("./installments/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj termin", installment:installment, course_id: req.params.course_id});
+            Course.findById(req.params.course_id, function(err, course){
+                if(err){
+                    console.log(err)
+        
+                } else {
+                    res.render("./installments/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj ratę", installment:installment, course: course});
+                }
+            })
+            
         }
     })
 });

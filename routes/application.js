@@ -53,7 +53,7 @@ router.get("/category/:category", isLoggedIn, function(req, res){
 })
 
 router.get("/new", function(req, res){
-    Event.findById(req.query.event_id, function(err, event){
+    Event.findById(req.query.event_id).populate("course").exec(function(err, event){
         if(err){
             console.log(err);
         } else {

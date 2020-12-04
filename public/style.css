@@ -77,19 +77,19 @@ input[type=date] {
     color:white;
     text-transform: uppercase;
     font-family: 'Nunito', sans-serif;
-    font-size: 50px;
+    font-size: 45px;
 }
 #infoWebsite {
     color:white;
     text-transform: uppercase;
     font-family: 'Nunito', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
 }
 .offices {
     color:white;
     
     font-family: 'Nunito', sans-serif;
-    font-size: 22px;
+    font-size: 18px;
     
 }
 input[type=text]::placeholder,

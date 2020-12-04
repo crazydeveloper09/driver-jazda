@@ -1,38 +1,33 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Dodaj zdjęcie do podstrony <%= subpage.name %>
-                   
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 17%">
+            <div id="form1">
+                <a href="/subpages/<%= subpage.address %>">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do podstrony <%= subpage.name %>
+                </a>
+                <h1 class="login">Dodaj zdjęcie do podstrony <%= subpage.name %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                    
-                                    <form action="/subpages/<%= subpage._id %>/add/picture" method="post" enctype="multipart/form-data">
-                                        
-                                        
-                                        <p class="info">Wybierz zdjęcie</p>
-                                        <input type="file" name="picture">
-                                        <br>
-                                        <br>
-                                        <div class="d-inline">
-                                            <input type="submit" value="Dodaj zdjęcie do podstrony" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
-                    </div>
-                </div>
+                <% } %>
+
+
+                <form action="/subpages/<%= subpage._id %>/add/picture" method="post" enctype="multipart/form-data">
+
+
+                    <p class="username">Wybierz zdjęcie</p>
+                    <input type="file" name="picture">
+                    <br>
+                    <br>
+                    <input type="submit" value="Dodaj zdjęcie do podstrony" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<%- include("../partials/footera") %>
+</body>
+</html>

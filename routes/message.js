@@ -13,11 +13,9 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 router.get("/new", isLoggedIn, function(req, res){
-    
-    res.render("./messages/new", {subpage_id: req.params.subpage_id,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj ważną informację do podstrony"});
-           
-        
-    
+    Subpage.findById(req.params.subpage_id, (err, subpage) => {
+        res.render("./messages/new", {subpage: subpage,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj ważną informację do podstrony"});
+    })
 })
 
 router.post("/", isLoggedIn, function(req, res){
@@ -49,7 +47,10 @@ router.get("/:message_id/edit", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("./messages/edit", {subpage_id: req.params.subpage_id,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj ważną wiadomość do podstrony", message:message});
+            Subpage.findById(req.params.subpage_id, (err, subpage) => {
+                res.render("./messages/edit", {subpage: subpage,currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj ważną wiadomość do podstrony", message:message});
+            })
+            
         }
     })
 });

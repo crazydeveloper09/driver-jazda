@@ -1,46 +1,44 @@
-<%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background: #eeeeee">
-                <div class="card-title text-center text-danger" id="name"> 
-                    <br>                           
-                   Edytuj użytkownika
-                   
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 4%">
+            <div id="form1">
+                <a href="/contact">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do podstrony kontakt
+                </a>
+                <h1 class="login">Edytuj użytkownika</h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                    
-                                    <form action="/driver/<%= driver._id %>?_method=PUT" method="post">
-                                        
-                                        <p class="info">Edytuj nazwę użytkownika</p>
-                                        <input type="text" placeholder="Nazwa użytkownika" value="<%= driver.username %>" name="driver[username]" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj imię i nazwisko</p>
-                                        <input type="text" name="driver[name]" value="<%= driver.name %>" placeholder="Imię i nazwisko" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj numer telefonu</p>
-                                        <input type="text" name="driver[phone]" value="<%= driver.phone %>" placeholder="Numer telefonu" class="form-control">
-                                        <br>
-                                        <p class="info">Edytuj email</p>
-                                        <input type="text" name="driver[email]" value="<%= driver.email %>" placeholder="Email" class="form-control">
-                                        <br>
-                                        
-                                        <div class="d-inline">
-                                            <input type="submit" value="Edytuj użytkownika" class="btn btn-outline-danger">
-                                            <input type="reset" value="Wyczyść" class="btn btn-outline-danger">
-                                        </div>
-                                    </form>
-                                </div>
-                    </div>
-                </div>
+                <% } %>
+
+                <form action="/driver/<%= driver._id %>?_method=PUT" method="post">
+
+                    <p class="username">Edytuj nazwę użytkownika</p>
+                    <input type="text" placeholder="Nazwa użytkownika" value="<%= driver.username %>"
+                        name="driver[username]" class="form-control">
+                    <br>
+                    <p class="username">Edytuj imię i nazwisko</p>
+                    <input type="text" name="driver[name]" value="<%= driver.name %>" placeholder="Imię i nazwisko"
+                        class="form-control">
+                    <br>
+                    <p class="username">Edytuj numer telefonu</p>
+                    <input type="text" name="driver[phone]" value="<%= driver.phone %>" placeholder="Numer telefonu"
+                        class="form-control">
+                    <br>
+                    <p class="username">Edytuj email</p>
+                    <input type="text" name="driver[email]" value="<%= driver.email %>" placeholder="Email"
+                        class="form-control">
+                    <br>
+
+                    <input type="submit" value="Edytuj użytkownika" class="btn btn-danger button btn-gradient">
+                    <input type="reset" value="Wyczyść" class="btn btn-dark button btn-black">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<%- include("../partials/footer") %>
+</body>
+</html>

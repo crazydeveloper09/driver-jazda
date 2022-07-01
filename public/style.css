@@ -1,38 +1,34 @@
 body,html {
     
     background: linear-gradient(#121213,#8a8a8a);
+    font-family: 'Montserrat', sans-serif;
 }
 .bg-gradient {
     background: linear-gradient(rgb(166, 3, 40), #131314);
 }
 .nav-link{
-    font-family: 'Nunito', sans-serif;
     text-transform: uppercase;
 }
 
 #name {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 35px;
     font-weight: 700;
 }
 .school {
-    font-family: 'Nunito', sans-serif;
     font-size: 25px;
     color: grey;
     font-weight: 700;
 }
 
 .info {
-    font-family: 'Nunito', sans-serif;
     font-size: 18px;
 }
 .footer {
-    font-family: 'Nunito', sans-serif;
     font-size: 13px;
 }
 
 .title {
-    font-family: 'Nunito', sans-serif;
     font-size: 22px;
     font-weight: 700;
 }
@@ -41,7 +37,6 @@ body,html {
     transform: rotate(-5deg);
 }
 .side-title {
-    font-family: 'Nunito', sans-serif;
     font-size: 22px;
     font-weight: 700;
     color: white;
@@ -49,12 +44,10 @@ body,html {
     margin-bottom: 0;
 }
 .toyota {
-    font-family: 'Nunito', sans-serif;
     font-size: 25px;
     font-weight: 700;
 }
 .logo {
-    font-family: 'Nunito', sans-serif;
     text-transform: uppercase;
 }
 input[type=text],
@@ -68,7 +61,6 @@ input[type=date] {
     border: none;
     border-bottom: 1px solid black;
     color: black;
-    font-family: 'Nunito', sans-serif;
 }
 .sidebar {
     background: linear-gradient(#131314, rgb(166, 3, 40))
@@ -76,19 +68,16 @@ input[type=date] {
 #website {
     color:white;
     text-transform: uppercase;
-    font-family: 'Nunito', sans-serif;
     font-size: 45px;
 }
 #infoWebsite {
     color:white;
     text-transform: uppercase;
-    font-family: 'Nunito', sans-serif;
     font-size: 25px;
 }
 .offices {
     color:white;
     
-    font-family: 'Nunito', sans-serif;
     font-size: 18px;
     
 }
@@ -98,13 +87,11 @@ input[type=email]::placeholder,
 input[type=password]::placeholder,
 input[type=number]::placeholder {
     color: black;
-    font-family: 'Nunito', sans-serif;
 }
 
 #textarea::placeholder {
     
     color: black;
-    font-family: 'Nunito', sans-serif;
 }
 
 #textarea {
@@ -112,7 +99,6 @@ input[type=number]::placeholder {
     border: none;
     border-bottom: 1px solid black;
     color: black;
-    font-family: 'Nunito', sans-serif;
 }
 .card {
     background: #eeeeee;
@@ -126,12 +112,10 @@ input[type=search] {
     border: none;
     border-bottom: 1px solid #dc3545;
     color: #dc3545;
-    font-family: 'Nunito', sans-serif;
 }
 
 input[type=search]::placeholder {
     color: #dc3545;
-    font-family: 'Nunito', sans-serif;
 }
 
 @media (max-width: 992px) {

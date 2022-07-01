@@ -2,6 +2,7 @@ body {
   width: 100vw;
   height: 100vh;
   background:  linear-gradient(rgb(166, 3, 40), #131314);
+  font-family: 'Montserrat', sans-serif;
 }
 #info {
   background:  linear-gradient(rgb(166, 3, 40), #131314);
@@ -13,21 +14,19 @@ body {
 }
 
 a {
-  font-family: 'Nunito', sans-serif;
   font-size: 20px;
   color:  black;
 }
 
 
 #form .login {
-  font-family: 'Nunito', sans-serif;
   font-size: 45px;
   font-weight: 700;
   color: rgb(166, 3, 40);
+  font-family: 'Poppins', sans-serif;
 }
 
 #form .username {
-  font-family: 'Nunito', sans-serif;
   font-size: 25px;
   font-weight: 700;
   color: #212529;
@@ -36,7 +35,6 @@ a {
 #form .button {
   width: 100%;
   margin-bottom: 15px;
-  font-family: 'Nunito', sans-serif;
   font-weight: 700;
   
 }
@@ -63,11 +61,9 @@ a {
 #description_r {
   color: #c9c7c7;
   font-size:18px;
-  font-family: 'Nunito', sans-serif;
 }
 
 .info {
-  font-family: 'Nunito', sans-serif;
   font-size: 18px;
 }
 .btn-black {

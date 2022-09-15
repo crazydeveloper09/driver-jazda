@@ -108,10 +108,10 @@ router.post("/feedback", function(req, res, next){
     async.waterfall([
         function(done) {
             const mailgun = require("mailgun-js");
-            const DOMAIN = 'sandbox10f798efbf804a6fad9949cc98b10ee1.mailgun.org';
-            const mg = mailgun({apiKey: process.env.API_MAILGUN, domain: DOMAIN});
+            const DOMAIN = 'websiteswithpassion.pl';
+            const mg = mailgun({apiKey: process.env.API_MAILGUN, domain: DOMAIN, host: "api.eu.mailgun.net"});
             const data = {
-                to: 'maciejkuta6@gmail.com',
+                to: 'sz.mazurek@wp.pl',
                 from: req.body.from,
                 subject: req.body.topic,
                 text: req.body.text + '\n\n' +

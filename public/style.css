@@ -118,6 +118,10 @@ input[type=search]::placeholder {
     color: #dc3545;
 }
 
+.dropdown-menu {
+    background: #eeeeee;
+}
+
 @media (max-width: 992px) {
     .bg-gradient {
         background: linear-gradient(#131314, rgb(166, 3, 40));
@@ -127,5 +131,15 @@ input[type=search]::placeholder {
     }
     #side {
         display: none;
+    }
+    .dropdown-menu.show {
+        background: transparent;
+        border: none;
+
+    }
+
+    a.dropdown-item {
+        color: white;
+        letter-spacing: 0.3px;
     }
 }

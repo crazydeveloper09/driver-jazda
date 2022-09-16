@@ -20,7 +20,7 @@
                                     <br>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
-                                    <p class="title text-danger"><i class="fas fa-percent"></i> Promocje</p>
+                                    <p class="title text-danger"><i class="fas fa-dollar-sign"></i>Ceny</p>
                                     <p class="info" id="promo_footer"></p>
                                    
                                 </div>
@@ -168,9 +168,9 @@
                 const p1 = document.createElement("p");
                 const a = document.createElement("a");
                 p.setAttribute("class", "info");
-                p.innerHTML = `Kategoria ${course.category} - <span class="text-blue"><strong><ins>${course.sale}zł</ins></strong></span>`;
+                p.innerHTML = `Kategoria ${course.category} - <span class="text-danger"><strong><ins>${course.price}zł</ins></strong></span>`;
                 p1.setAttribute("class", "info");
-                p1.innerHTML = `Kategoria ${course.category} - <span class="text-blue"><strong><ins>${course.sale}zł</ins></strong></span>`;
+                p1.innerHTML = `Kategoria ${course.category} - <span class="text-danger"><strong><ins>${course.price}zł</ins></strong></span>`;
                 a.setAttribute("class", "dropdown-item");
                 a.setAttribute("href", `/courses/${course.category}`);
                 a.innerText = `Kategoria ${course.category}`;

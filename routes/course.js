@@ -115,7 +115,7 @@ router.post("/:id/add/picture", upload.single("picture"), function(req, res){
    
 })
 
-router.post("/:id", isLoggedIn, function(req, res){
+router.put("/:id", isLoggedIn, function(req, res){
     Course.findByIdAndUpdate(req.params.id, req.body.course, function(err, updatedCourse){
         if(err){
             console.log(err)

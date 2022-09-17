@@ -20,7 +20,7 @@
                                     <br>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
-                                    <p class="title text-danger"><i class="fas fa-dollar-sign"></i>Ceny</p>
+                                    <p class="title text-danger"><i class="fas fa-dollar-sign"></i> Ceny</p>
                                     <p class="info" id="promo_footer"></p>
                                    
                                 </div>
@@ -211,11 +211,11 @@
                         p1.setAttribute("class", "offices");
                         p.setAttribute("class", "info");
                         if(office.additional){
-                            p.innerHTML = `<strong>${office.city}, ul.${office.street}</strong> <br>${office.additional}`;
-                            p1.innerHTML = `${office.city}, ul.${office.street} <br>${office.additional} <br> ${office.what}`
+                            p.innerHTML = `<strong>${office.city}, ul. ${office.street}</strong> <br>${office.additional}`;
+                            p1.innerHTML = `${office.city}, ul. ${office.street} <br>${office.additional} <br> ${office.what}`
                         } else {
-                            p.innerHTML = `<strong>${office.city}, ul.${office.street}</strong>`;
-                            p1.innerHTML = `${office.city}, ul.${office.street} <br> ${office.what}`
+                            p.innerHTML = `<strong>${office.city}, ul. ${office.street}</strong>`;
+                            p1.innerHTML = `${office.city}, ul. ${office.street} <br> ${office.what}`
                         }
                         div.className = "col-lg-4";
                         div.append(p1);

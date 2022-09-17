@@ -133,4 +133,10 @@ router.post("/feedback", function(req, res, next){
     });
 });
 
+router.get("*", (req, res) => {
+    res.render("error", {
+        header: "Error 404"
+    })
+})
+
 module.exports = router;

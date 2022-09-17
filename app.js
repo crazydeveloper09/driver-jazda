@@ -1,8 +1,8 @@
 const express               = require("express"),
     app                     = express(),
     mongoose                = require("mongoose"),
+    helmet                  = require("helmet"),
     Driver                  = require("./models/driver"),
-    passportLocalMongoose   = require("passport-local-mongoose"),
     passport                = require("passport"),
     announcementRoutes      = require("./routes/announcement"),
     applicationRoutes       = require("./routes/application"),
@@ -21,7 +21,7 @@ const express               = require("express"),
     galleryRoutes           = require("./routes/gallery"),
     indexRoutes             = require("./routes/index"),
     LocalStrategy           = require("passport-local"),
-	  methodOverride        = require("method-override"),
+	methodOverride        = require("method-override"),
     bodyParser              = require("body-parser"),
     flash                   = require("connect-flash");
 
@@ -35,6 +35,9 @@ app.use(flash());
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(helmet({
+    contentSecurityPolicy: false
+}))
 app.use(methodOverride("_method"));
 
 app.use(require("express-session")({

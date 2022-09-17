@@ -77,7 +77,7 @@
                            
                            <% if(course.events.length === 0){ %>
                                 <div class="alert alert-light">
-                                    Z powodu koronawirusa zajęcia są odwołane
+                                    Nie dodaliśmy żadnych wydarzeń
                                 </div>
                            <% } else { %>
                                 <ul>
@@ -105,7 +105,7 @@
                             <div class="row">
                                 <% course.pictures.forEach((picture) => { %>
                                     <div class="col-lg-6 col-md-12 text-center">
-                                        <img src="<%= picture.link %>" height="150" width="150" class="rounded">
+                                        <img src="<%= picture.link %>" height="150" width="150" class="rounded" crossorigin="anonymous">
                                         <% if(currentUser){ %>
                                             <br>
                                             <a href="/gallery/pictures/<%= picture._id %>/delete" class="info text-danger">Usuń zdjęcie</a>

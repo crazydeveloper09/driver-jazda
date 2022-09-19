@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
-    city: String,
+    office: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Office"
+    },
     time: String,
     date: String,
     course: {

@@ -40,7 +40,7 @@
                                 Driver <script>document.write(new Date().getFullYear())</script>  © Wszelkie prawa zastrzeżone by:
                                 <a href="https://websiteswithpassion.pl" target="_blank">Websites With Passion</a> 
                                 <br>
-                                 <a href="/login">Panel administracyjny</a> 
+                                <a href="/login">Panel administracyjny</a> 
                             </p>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                 a.setAttribute("href", `/applications/new?event_id=${event._id}`);
                 a.setAttribute("class", "info");
                 a.style.color = "#212529";
-                a.innerHTML = `<br><strong>${event.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
+                a.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
                 eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
                 eventInfoFooter.appendChild(a);
                 

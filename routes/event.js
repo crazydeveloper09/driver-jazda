@@ -4,6 +4,7 @@ const express             = require("express"),
     router                = express.Router({mergeParams: true}),
     methodOverride        = require("method-override"),
     Event                = require("../models/event"),
+    Office                = require("../models/office"),
     Course                = require("../models/course"),
     flash                 = require("connect-flash"),
     dotenv                = require("dotenv");
@@ -19,13 +20,15 @@ router.get("/new", isLoggedIn, function(req, res){
             console.log(err)
 
         } else {
-            res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", course: course});
+            Office.find({type: 'car'}, (err, offices) => {
+                if(err){
+                    console.log(err)
+                } else {
+                    res.render("./events/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj termin", course: course, offices: offices});
+                }
+            })
         }
     })
-    
-           
-        
-    
 })
 
 router.post("/", isLoggedIn, function(req, res){
@@ -34,6 +37,7 @@ router.post("/", isLoggedIn, function(req, res){
             console.log(err);
         } else {
             event.course = req.params.course_id;
+            event.office = req.body.office;
             event.save();
             Course.findById(req.params.course_id, function(err, course){
                 if(err){
@@ -50,7 +54,7 @@ router.post("/", isLoggedIn, function(req, res){
 
 
 router.get("/:event_id/edit", isLoggedIn, function(req, res){
-    Event.findById(req.params.event_id, function(err, event){
+    Event.findById(req.params.event_id).populate("office").exec(function(err, event){
         if(err){
             console.log(err);
         } else {
@@ -59,13 +63,21 @@ router.get("/:event_id/edit", isLoggedIn, function(req, res){
                     console.log(err)
         
                 } else {
-                    res.render("./events/edit", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj termin", event:event, course: course});
+                    Office.find({type: 'car'}, (err, offices) => {
+                        if(err){
+                            console.log(err)
+                        } else {
+                            res.render("./events/edit", {
+                                currentUser: req.user,
+                                header:"Driver Nauka Jazdy | Samochody | Edytuj termin", 
+                                event:event, 
+                                course: course,
+                                offices: offices,
+                            });
+                        }
+                    })
                 }
             })
-            
-                   
-                
-            
         }
     })
 });
@@ -80,7 +92,6 @@ router.put("/:event_id", isLoggedIn, function(req, res){
                     console.log(err)
 
                 } else {
-                   
                     res.redirect("/courses/" + course.category)
                 }
             })

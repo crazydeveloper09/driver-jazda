@@ -72,8 +72,6 @@ router.put("/:listElement_id", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            listElement.list = list._id;
-            listElement.save()
             Subpage.findById(req.params.subpage_id, (err, subpage) => {
                 res.redirect(`/subpages/${subpage.address}`);
             })

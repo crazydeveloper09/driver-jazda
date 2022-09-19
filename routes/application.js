@@ -72,7 +72,7 @@ router.get("/", isLoggedIn, function(req, res){
             console.log(err);
         } else {
             
-            res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Zapisy na kurs",applications:applications, events:events});
+            res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Zapisy na kurs",applications:applications, events:applications});
                 
             
         }

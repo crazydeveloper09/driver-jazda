@@ -10,7 +10,11 @@ let officeSchema = new mongoose.Schema({
     openingHours: String,
     street: String,
     lat: Number,
-    lng: Number
+    lng: Number,
+    type: {
+        type: String,
+        default: 'car'
+    }
 })
 
 module.exports = mongoose.model("Office", officeSchema)

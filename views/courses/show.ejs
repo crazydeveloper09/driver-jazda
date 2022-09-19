@@ -84,7 +84,7 @@
                                     <% for(let i=0;i<course.events.length;i++){ %>
                                         <li class="info">
                                             <strong>
-                                                <%= course.events[i].city %></strong>, <%= course.events[i].date %>, <%= course.events[i].time %>
+                                                <%= course.events[i].office.city %></strong>, <%= course.events[i].date %>, <%= course.events[i].time %>
                                             <a href="/applications/new?event_id=<%= course.events[i]._id %>" class="text-danger">Zapisz się</a>
                                             <% if(currentUser){ %>
                                                 <br>
@@ -98,8 +98,9 @@
                                 </ul>
                            <% } %>
                            <% if(currentUser){ %>
-                            <a href="/courses/<%= course._id %>/edit" class="btn btn-danger">Edytuj kurs</a>
+                            <a href="/courses/<%= course._id %>/edit" class="btn btn-primary">Edytuj kurs</a>
                             <a href="/courses/<%= course._id %>/add/picture" class="btn btn-success">Dodaj zdjęcie</a>
+                            <a href="/courses/<%= course._id %>/delete" class="btn btn-danger">Usuń kurs</a>
                             <% } %>
                            <br>
                             <div class="row">

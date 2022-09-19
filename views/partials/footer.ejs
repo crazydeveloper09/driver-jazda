@@ -66,7 +66,7 @@
                 let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");
                 alert.innerText = "Nie dodaliśmy jeszcze żadnych wydarzeń";
-				 let alert1 = document.createElement("div");
+				let alert1 = document.createElement("div");
                 alert1.setAttribute("class", "alert alert-light");
                 alert1.innerText = "Nie dodaliśmy jeszcze żadnych wydarzeń";
                 eventInfoFooter.innerHTML = "";
@@ -80,12 +80,12 @@
                     a.setAttribute("href", `/applications/new?event_id=${event._id}`);
                     a.setAttribute("class", "info");
                     a.style.color = "#212529";
-                    a.innerHTML = `<br><strong>${event.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
+                    a.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
                     const a1 = document.createElement("a");
                     a1.setAttribute("href", `/applications/new?event_id=${event._id}`);
                     a1.setAttribute("class", "info");
                     a1.style.color = "#212529";
-                    a1.innerHTML = `<br><strong>${event.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
+                    a1.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
                     eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
                     eventInfoSide.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
                     eventInfoFooter.appendChild(a1);

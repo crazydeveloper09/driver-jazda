@@ -42,11 +42,17 @@ router.get("/new", isLoggedIn, function(req, res){
 });
 
 router.get("/:category", function(req, res){
-    Course.findOne({category: req.params.category}).populate(["events", "characteristics", "installments", "pictures"]).exec(function(err, course){
+    Course.findOne({category: req.params.category}).populate([{ 
+        path: 'events',
+        populate: {
+          path: 'office',
+          model: 'Office'
+        } 
+     }, "characteristics", "installments", "pictures"]).exec(function(err, course){
         if(err){
             console.log(err)
         } else {
-			console.log(req.params.category)
+			console.log(course)
             res.render("./courses/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Oferta | Kategoria " + course.category, course: course});
         }
     })
@@ -123,6 +129,15 @@ router.put("/:id", isLoggedIn, function(req, res){
             updatedCourse.type = "car";
             updatedCourse.save();
             res.redirect("/courses/" + updatedCourse.category);
+        }
+    });
+});
+router.get("/:id/delete", isLoggedIn, function(req, res){
+    Course.findByIdAndRemove(req.params.id, function(err, removedCourse){
+        if(err){
+            console.log(err)
+        } else {
+            res.redirect("/subpages/strona-główna");
         }
     });
 });

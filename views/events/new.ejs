@@ -16,12 +16,10 @@
 
                 <form action="/courses/<%= course._id %>/events" method="post">
                     <p class="username">Wybierz miasto</p>
-                    <select name="city" class="form-control">
-                        
-                        <option>Głogów</option>
-                        <option>Wschowa</option>
-
-
+                    <select name="office" class="form-control">
+                        <% offices.forEach((office) => { %>
+                            <option value="<%= office._id %>"><%= office.city %></option>
+                        <% }) %>
                     </select>
                     <br>
 

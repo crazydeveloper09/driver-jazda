@@ -16,10 +16,10 @@
 
                 <form action="/courses/<%= course._id %>/events/<%= event._id %>?_method=PUT" method="post">
                     <p class="username">Edytuj miasto</p>
-                    <select name="event[city]" class="form-control">
-                        <option><%= event.city %></option>
-                        <option>Głogów</option>
-                        <option>Wschowa</option>
+                    <select name="event[office]" class="form-control">
+                        <% offices.forEach((office) => { %>
+                            <option value="<%= office._id %>" selected="<%= event.office.city === office.city %>"><%= office.city %></option>
+                        <% }) %>
 
 
                     </select>

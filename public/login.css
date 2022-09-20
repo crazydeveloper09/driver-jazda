@@ -18,6 +18,11 @@ a {
   color:  black;
 }
 
+.form-control:focus {
+  box-shadow: none;
+  border: 2px solid rgb(166, 3, 40);
+}
+
 
 #form .login {
   font-size: 45px;

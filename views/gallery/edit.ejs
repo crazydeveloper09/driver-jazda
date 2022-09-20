@@ -19,10 +19,10 @@
                     <p class="username">Edytuj nazwę galerii</p>
 
                     <input type="text" name="gallery[title]" placeholder="Tytuł galerii" value="<%= gallery.title %>"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Edytuj, gdzie ma się znaleźć</p>
-                    <select name="type" class="form-control">
+                    <select name="type" class="form-control" required>
                         <option><%= gallery.type %></option>
                         <option value="car">Samochody</option>
                         <option value="motorcycle">Motocykle</option>

@@ -15,14 +15,14 @@
                 <% } %>
                 <form action="/courses" method="post">
                     <p class="username">Wpisz nazwę kategorii</p>
-                    <input type="text" placeholder="Kategoria" name="category" class="form-control">
+                    <input type="text" placeholder="Kategoria" name="category" class="form-control" required>
                     <br>
                     <p class="username">Wpisz cenę kursu</p>
-                    <input type="number" name="price" placeholder="Cena kursu" class="form-control">
+                    <input type="number" name="price" placeholder="Cena kursu" class="form-control" required>
                     <br>
                     <p class="username">Wpisz cenę dodatkowej godziny</p>
                     <input type="number" name="additionalPrice" placeholder="Cena dodatkowej godziny"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Wpisz promocyjną cenę</p>
                     <input type="number" name="sale" placeholder="Promocyjna cena" class="form-control">

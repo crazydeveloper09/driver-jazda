@@ -17,22 +17,21 @@
                 <form action="/subpages/<%= subpage._id %>?_method=PUT" method="post">
                     <p class="username">Edytuj nazwę podstrony</p>
                     <input type="text" placeholder="np. Strona Główna" value="<%= subpage.name %>" name="subpage[name]"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Edytuj tytuł podstrony</p>
                     <input type="text" placeholder="np. Witamy" value="<%= subpage.title %>" name="subpage[title]"
-                        class="form-control">
+                        class="form-control" required>
 
 
 
                     <br>
                     <p class="username">Edytuj podpis pod tytułem</p>
                     <input type="text" name="subpage[more]" placeholder="np. Na naszej stronie"
-                        value="<%= subpage.more %>" class="form-control">
+                        value="<%= subpage.more %>" class="form-control" required>
                     <br>
                     <p class="username">Edytuj opis podstrony</p>
-                    <textarea name="subpage[text]" placeholder="Opis podstrony" id="textarea"
-                        class="form-control"><%= subpage.text %></textarea>
+                    <textarea name="subpage[text]" placeholder="Opis podstrony" id="textarea" class="form-control" required><%= subpage.text %></textarea>
 
                     <br>
 

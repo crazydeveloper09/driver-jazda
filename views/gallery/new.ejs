@@ -16,7 +16,7 @@
 
                 <form action="/gallery" method="post" enctype="multipart/form-data">
                     <p class="username">Wybierz, gdzie ma się znaleźć</p>
-                    <select name="type" class="form-control">
+                    <select name="type" class="form-control" required>
                         <option value="car">Samochody</option>
                         <option value="motorcycle">Motocykle</option>
                         <option value="all">Na obydwu stronach</option>
@@ -26,7 +26,7 @@
                     <br>
                     <p class="username">Wpisz nazwę galerii</p>
 
-                    <input type="text" name="title" placeholder="Tytuł galerii" class="form-control">
+                    <input type="text" name="title" placeholder="Tytuł galerii" class="form-control" required>
                     <br>
                     <p class="username">Wybierz zdjęcie główne</p>
                     <input type="file" name="profile">

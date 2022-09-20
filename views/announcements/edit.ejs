@@ -15,8 +15,7 @@
                 <% } %>
 
                 <form action="/announcements/<%= announcement._id %>?_method=PUT" method="post">
-                    <textarea name="announcement[text]" id="textarea" placeholder="Tekst ogłoszenia"
-                        class="form-control"><%= announcement.text %></textarea>
+                    <textarea name="announcement[text]" id="textarea" placeholder="Tekst ogłoszenia" class="form-control" required><%= announcement.text %></textarea>
                     <br>
 
                     <input type="submit" value="Dodaj ogłoszenie" class="btn btn-danger button btn-gradient">

@@ -57,7 +57,7 @@
                             <p class="info">Nr telefonu: <strong><%= applications[i].phone %></strong></p>
                             <p class="info">Email: <strong><%= applications[i].email %></strong></p>
                             <p class="info">Kategoria: <strong><%= applications[i].course.category %></strong></p>
-                            <p class="info">Data i godzina: <strong><%= applications[i].event.city %>, <%= applications[i].event.date %>
+                            <p class="info">Data i godzina: <strong><%= applications[i].event.office.city %>, <%= applications[i].event.date %>
                                 <%= applications[i].event.time %></strong></p>
                             <p>
                                 <% if(applications[i].isApplicated === false){ %>

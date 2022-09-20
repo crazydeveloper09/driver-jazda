@@ -104,21 +104,25 @@ router.get("/:id/add/picture", isLoggedIn, function(req, res){
 })
 
 router.post("/:id/add/picture", upload.single("picture"), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        Course.findById(req.params.id, function(err, course){
-            if(err){
-                console.log(err)
-            } else {
-                Picture.create({link: result.secure_url}, (err, createdPicture) => {
-                    course.pictures.push(createdPicture);
-                    course.save();
-                    res.redirect("/courses" + course.category)
-                })
-                
-            }
+    if(req.file) {
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            Course.findById(req.params.id, function(err, course){
+                if(err){
+                    console.log(err)
+                } else {
+                    Picture.create({link: result.secure_url}, (err, createdPicture) => {
+                        course.pictures.push(createdPicture);
+                        course.save();
+                        res.redirect("/courses" + course.category)
+                    })
+                    
+                }
+            });
         });
-    });
-   
+    } else {
+        req.flash("error", "Wybierz plik")
+        res.redirect(`/courses/${req.params.id}/add/picture`)
+    }
 })
 
 router.put("/:id", isLoggedIn, function(req, res){

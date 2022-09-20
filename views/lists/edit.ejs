@@ -17,7 +17,7 @@
                 <form action="/subpages/<%= subpage._id %>/lists/<%= list._id %>?_method=PUT" method="post">
 
                     <p class="username">Edytuj tytuł listy</p>
-                    <textarea name="list[title]" id="textarea" placeholder="Tytuł listy" class="form-control"><%= list.title %></textarea>
+                    <textarea name="list[title]" id="textarea" placeholder="Tytuł listy" class="form-control" required><%= list.title %></textarea>
 
                     <br>
 

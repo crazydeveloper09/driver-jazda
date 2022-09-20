@@ -18,19 +18,19 @@
 
                     <p class="username">Edytuj nazwę użytkownika</p>
                     <input type="text" placeholder="Nazwa użytkownika" value="<%= driver.username %>"
-                        name="driver[username]" class="form-control">
+                        name="driver[username]" class="form-control" required>
                     <br>
                     <p class="username">Edytuj imię i nazwisko</p>
                     <input type="text" name="driver[name]" value="<%= driver.name %>" placeholder="Imię i nazwisko"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Edytuj numer telefonu</p>
                     <input type="text" name="driver[phone]" value="<%= driver.phone %>" placeholder="Numer telefonu"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Edytuj email</p>
                     <input type="text" name="driver[email]" value="<%= driver.email %>" placeholder="Email"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
 
                     <input type="submit" value="Edytuj użytkownika" class="btn btn-danger button btn-gradient">

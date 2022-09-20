@@ -19,7 +19,13 @@ app.use(flash());
 
 router.get("/search", isLoggedIn, (req, res) => {
     const regex = new RegExp(escapeRegex(req.query.name), 'gi');
-    Application.find({name: regex}).populate(["event", "course"]).exec((err, applications) => {
+    Application.find({name: regex}).populate([{ 
+        path: 'events',
+        populate: {
+          path: 'office',
+          model: 'Office'
+        } 
+     }, "course"]).exec((err, applications) => {
         if(err){
             console.log(err);
         } else {
@@ -37,7 +43,13 @@ router.get("/category/:category", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            Application.find({course: course._id}).populate(["event", "course"]).exec((err,applications) => {
+            Application.find({course: course._id}).populate([{ 
+                path: 'events',
+                populate: {
+                  path: 'office',
+                  model: 'Office'
+                } 
+             }, "course"]).exec((err,applications) => {
                 if(err){
                     console.log(err);
                 } else {
@@ -67,7 +79,13 @@ router.get("/new", function(req, res){
 });
 
 router.get("/", isLoggedIn, function(req, res){
-    Application.find({}).populate(["course", "event"]).exec(function(err, applications){
+    Application.find({}).populate(["course", { 
+        path: 'events',
+        populate: {
+          path: 'office',
+          model: 'Office'
+        } 
+     }]).exec(function(err, applications){
         if(err){
             console.log(err);
         } else {
@@ -94,38 +112,6 @@ router.post("/", function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    async function sendMail(application) {
-                        let smtpTransport = nodemailer.createTransport({
-                            service: 'Gmail',
-                            auth: {
-                                    type: "OAuth2",
-                                    user: 'driverjazdapl@gmail.com',
-                                    clientId: process.env.CLIENT_ID,
-                                    clientSecret: process.env.CLIENT_SECRET,
-                                    refreshToken: process.env.REFRESH_TOKEN
-                                    
-                                    
-                                
-                               
-                            }
-                        });
-                        let mailOptions = {
-                            to: application.email,
-                            from: 'Driver jazda',
-                            subject: "Potwierdzenie zapisu na kurs prawa jazdy kategorii " + application.course.category,
-                            text: 'Witaj ' + application.name + ', \n\n' + 
-                            'Właśnie zapisaliśmy Cię na kurs prawa jazdy kategorii ' + application.course.category +
-                            '. Prosimy przyjdź ' + application.event.date + ' o ' + application.event.time + 
-                            ' do biura w miejscowości ' + application.event.city + ' z numerem PKK, żebyśmy mogli dokończyć procedurę zapisu.' +
-                            ' Dostaniesz wtedy również dodatkowe materiały np. płytę z pytaniami do egzaminu.' + '\n\n' +
-                            'Pozdrawiamy,' + '\n' + 'Zespół Driver jazda'  
-                        };
-                        smtpTransport.sendMail(mailOptions, function(err){
-                            req.flash("success", "Email został wysłany na adres " + application.email);
-                            done(err, 'done');
-                        });
-                    }
-                    sendMail(createdApplication);
                     createdApplication.event = event._id;
                     createdApplication.course = event.course;
                     createdApplication.save();
@@ -151,11 +137,49 @@ router.get("/:id/delete", isLoggedIn, function(req, res){
 
 router.post("/:id/accepted", isLoggedIn, function(req, res, next){
     
-            Application.findById(req.params.id).populate(["course", "event"]).exec(function(err, application){
+            Application.findById(req.params.id).populate(["course", { 
+                path: 'events',
+                populate: {
+                  path: 'office',
+                  model: 'Office'
+                } 
+             }]).exec(function(err, application){
                 if(!application){
                     req.flash('error', 'Nie znaleźliśmy takiej aplikacji. Spróbuj ponownie');
                     return res.redirect("/applications");
                 }
+                async function sendMail(application) {
+                    let smtpTransport = nodemailer.createTransport({
+                        service: 'Gmail',
+                        auth: {
+                                type: "OAuth2",
+                                user: 'driverjazdapl@gmail.com',
+                                clientId: process.env.CLIENT_ID,
+                                clientSecret: process.env.CLIENT_SECRET,
+                                refreshToken: process.env.REFRESH_TOKEN
+                                
+                                
+                            
+                           
+                        }
+                    });
+                    let mailOptions = {
+                        to: application.email,
+                        from: 'Driver jazda',
+                        subject: "Potwierdzenie zapisu na kurs prawa jazdy kategorii " + application.course.category,
+                        text: 'Witaj ' + application.name + ', \n\n' + 
+                        'Właśnie zapisaliśmy Cię na kurs prawa jazdy kategorii ' + application.course.category +
+                        '. Prosimy przyjdź ' + application.event.date + ' o ' + application.event.time + 
+                        ' do biura w miejscowości ' + application.event.office.city + ' z numerem PKK, żebyśmy mogli dokończyć procedurę zapisu.' +
+                        ' Dostaniesz wtedy również dodatkowe materiały np. płytę z pytaniami do egzaminu.' + '\n\n' +
+                        'Pozdrawiamy,' + '\n' + 'Zespół Driver jazda'  
+                    };
+                    smtpTransport.sendMail(mailOptions, function(err){
+                        req.flash("success", "Email został wysłany na adres " + application.email);
+                        done(err, 'done');
+                    });
+                }
+                sendMail(createdApplication);
                 application.isApplicated = true;
                 application.save();
                 res.redirect('/applications');

@@ -17,8 +17,7 @@
                 <form action="/courses/<%= course._id %>/characteristics/<%= characteristic._id %>?_method=PUT"
                     method="post">
                     <p class="username">Tekst cechy charakerystycznej</p>
-                    <textarea name="characteristic[text]" id="textarea" placeholder="Tekst cechy charakerystycznej"
-                        class="form-control"><%= characteristic.text %></textarea>
+                    <textarea name="characteristic[text]" id="textarea" placeholder="Tekst cechy charakerystycznej" class="form-control" required><%= characteristic.text %></textarea>
                     <br>
 
                     <input type="submit" value="Edytuj cechę charakterystyczną"

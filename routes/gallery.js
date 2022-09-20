@@ -52,11 +52,7 @@ router.get("/", function(req, res){
 
 
 router.get("/new", isLoggedIn, function(req, res){
-    
     res.render("./gallery/new", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Dodaj galerię",});
-           
-        
-    
 });
 
 router.get("/:id", function(req, res){
@@ -70,15 +66,20 @@ router.get("/:id", function(req, res){
 })
 
 router.post("/", upload.single("profile"), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        Gallery.create({title: req.body.title, profile:result.secure_url, pictures:[], type: req.body.type}, function(err,createdGallery){
-            if(err){
-                console.log(err);
-            } else {
-                res.redirect("/gallery/" + createdGallery._id);
-            }
-        })
-    });
+    if(typeof req.file !== 'undefined') {
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            Gallery.create({title: req.body.title, profile:result.secure_url, pictures:[], type: req.body.type}, function(err,createdGallery){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.redirect("/gallery/" + createdGallery._id);
+                }
+            })
+        });
+    } else {
+        req.flash("error", "Wybierz plik")
+        res.redirect("/gallery/new")
+    }
     
 });
 
@@ -133,20 +134,25 @@ router.get("/:id/add/picture", isLoggedIn, function(req, res){
 })
 
 router.post("/:id/add/picture", upload.single("picture"), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        Gallery.findById(req.params.id, function(err, gallery){
-            if(err){
-                console.log(err)
-            } else {
-                Picture.create({link: result.secure_url}, (err, createdPicture) => {
-                    gallery.pictures.push(createdPicture);
-                    gallery.save();
-                    res.redirect("/gallery/" + gallery._id)
-                })
-                
-            }
+    if(typeof req.file !== 'undefined') {
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            Gallery.findById(req.params.id, function(err, gallery){
+                if(err){
+                    console.log(err)
+                } else {
+                    Picture.create({link: result.secure_url}, (err, createdPicture) => {
+                        gallery.pictures.push(createdPicture);
+                        gallery.save();
+                        res.redirect("/gallery/" + gallery._id)
+                    })
+                    
+                }
+            });
         });
-    });
+    } else {
+        req.flash("error", "Wybierz plik")
+        res.redirect(`/gallery/${req.params.id}/add/picture`)
+    }
    
 })
 
@@ -161,17 +167,22 @@ router.get("/:id/edit/profile", isLoggedIn, function(req, res){
 })
 
 router.post("/:id/edit/profile", upload.single("profile"), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        Gallery.findById(req.params.id, function(err, gallery){
-            if(err){
-                console.log(err)
-            } else {
-                gallery.profile = result.secure_url;
-                gallery.save();
-                res.redirect("/gallery/" + gallery._id)
-            }
+    if(typeof req.file !== 'undefined') {
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            Gallery.findById(req.params.id, function(err, gallery){
+                if(err){
+                    console.log(err)
+                } else {
+                    gallery.profile = result.secure_url;
+                    gallery.save();
+                    res.redirect("/gallery/" + gallery._id)
+                }
+            });
         });
-    });
+    } else {
+        req.flash("error", "Wybierz plik")
+        res.redirect(`/gallery/${req.params.id}/edit/profile`)
+    }
     
 })
 

@@ -18,7 +18,7 @@
 
                     <p class="username">Edytuj nazwę biura</p>
                     <input type="text" placeholder="Nazwa biura" value="<%= office.name %>" name="office[name]"
-                        class="form-control">
+                        class="form-control" required>
 
 
 
@@ -26,15 +26,15 @@
 
                     <p class="username">Edytuj informację o godzinach otwarcia</p>
                     <input type="text" name="office[openingHours]" value="<%= office.openingHours %>"
-                        placeholder="Informacja o godzinach otwarcia" class="form-control">
+                        placeholder="Informacja o godzinach otwarcia" class="form-control" required>
                     <br>
                     <p class="username">Edytuj adres do map Google</p>
                     <input type="text" name="office[location]" value="<%= office.location %>"
-                        placeholder="Adres do map Google" class="form-control">
+                        placeholder="Adres do map Google" class="form-control" required>
                     <br>
                     <p class="username">Edytuj co się znajduje w biurze</p>
                     <input type="text" name="office[what]" value="<%= office.what %>"
-                        placeholder="Co się znajduje w biurze" class="form-control">
+                        placeholder="Co się znajduje w biurze" class="form-control" required>
                     <br>
                     <p class="username">Edytuj dodatkową informację jak się wchodzi do biura</p>
                     <input type="text" name="office[additional]" value="<%= office.additional %>"

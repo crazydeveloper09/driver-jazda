@@ -94,20 +94,25 @@ router.get("/:id/add/picture", isLoggedIn, function(req, res){
 })
 
 router.post("/:id/add/picture", upload.single("picture"), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        Subpage.findById(req.params.id, function(err, subpage){
-            if(err){
-                console.log(err)
-            } else {
-                Picture.create({link: result.secure_url}, (err, createdPicture) => {
-                    subpage.pictures.push(createdPicture);
-                    subpage.save();
-                    res.redirect("/subpages/" + subpage.address)
-                })
-                
-            }
+    if(req.file) {
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            Subpage.findById(req.params.id, function(err, subpage){
+                if(err){
+                    console.log(err)
+                } else {
+                    Picture.create({link: result.secure_url}, (err, createdPicture) => {
+                        subpage.pictures.push(createdPicture);
+                        subpage.save();
+                        res.redirect("/subpages/" + subpage.address)
+                    })
+                    
+                }
+            });
         });
-    });
+    } else {
+        req.flash("error", "Wybierz plik")
+        res.redirect(`/subpages/${req.params.id}/add/picture`)
+    }
    
 })
 

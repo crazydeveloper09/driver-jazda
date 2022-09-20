@@ -20,7 +20,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="color:#212529; background: #fff;"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
+                        <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control" required>
                     </div>
                     
                     
@@ -29,7 +29,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="color:#212529; background: #fff;"><i class="fas fa-phone"></i></span>
                         </div>
-                        <input type="tel" name="phone" placeholder="Nr telefonu" class="form-control">
+                        <input type="tel" name="phone" placeholder="Nr telefonu" class="form-control" required>
                     </div>
                     
                     
@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="color:#212529; background: #fff;"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="email" name="email" placeholder="Adres email" class="form-control">
+                        <input type="email" name="email" placeholder="Adres email" class="form-control" required>
                     </div>
                    
                     
@@ -47,7 +47,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="color:#212529; background: #fff;"><i class="fas fa-calendar"></i></span>
                         </div>
-                        <select name="event" class="form-control" value="<%= event._id %>" id="select">
+                        <select name="event" class="form-control" value="<%= event._id %>" id="select" required>
                             <option value="<%= event._id %>">
                                 <%= event.office.city %>, <%= event.date %> godz. <%= event.time %>
                             </option>

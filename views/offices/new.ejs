@@ -16,17 +16,17 @@
                 <form action="/driver/<%= driver_id %>/offices" method="post">
 
                     <p class="username">Wpisz nazwę biura</p>
-                    <input type="text" placeholder="Nazwa biura" name="name" class="form-control">
+                    <input type="text" placeholder="Nazwa biura" name="name" class="form-control" required>
                     <br>
                     <p class="username">Wpisz informację o godzinach otwarcia</p>
                     <input type="text" name="openingHours" placeholder="Informacja o godzinach otwarcia"
-                        class="form-control">
+                        class="form-control" required>
                     <br>
                     <p class="username">Wpisz adres do map Google (adres, kod pocztowy miejscowość)</p>
-                    <input type="text" name="location" placeholder="Adres do map Google" class="form-control">
+                    <input type="text" name="location" placeholder="Adres do map Google" class="form-control" required>
                     <br>
                     <p class="username">Wpisz co się znajduje w biurze</p>
-                    <input type="text" name="what" placeholder="Co się znajduje w biurze" class="form-control">
+                    <input type="text" name="what" placeholder="Co się znajduje w biurze" class="form-control" required>
                     <br>
                     <p class="username">Wpisz dodatkową informację jak się wchodzi do biura</p>
                     <input type="text" name="additional" placeholder="Dodatkowa informacja" class="form-control">

@@ -16,7 +16,7 @@
 
                 <form action="/courses/<%= course._id %>/events/<%= event._id %>?_method=PUT" method="post">
                     <p class="username">Edytuj miasto</p>
-                    <select name="event[office]" class="form-control">
+                    <select name="event[office]" class="form-control" required>
                         <% offices.forEach((office) => { %>
                             <option value="<%= office._id %>" selected="<%= event.office.city === office.city %>"><%= office.city %></option>
                         <% }) %>
@@ -26,10 +26,10 @@
                     <br>
 
                     <p class="info">Edytuj datę</p>
-                    <input type="date" name="event[date]" value="<%= event.date %>" class="form-control">
+                    <input type="date" name="event[date]" value="<%= event.date %>" class="form-control" required>
                     <br>
                     <p class="info">Edytuj czas</p>
-                    <input type="time" name="event[time]" value="<%= event.time %>" class="form-control">
+                    <input type="time" name="event[time]" value="<%= event.time %>" class="form-control" required>
                     <br>
 
                     <input type="submit" value="Edytuj termin" class="btn btn-danger button btn-gradient">

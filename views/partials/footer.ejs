@@ -74,6 +74,8 @@
                 eventInfoFooter.appendChild(alert);
                 eventInfoSide.appendChild(alert1);
             } else {
+                eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
+                eventInfoSide.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
                 response.data.forEach((event) => {
 
                     const a = document.createElement("a");
@@ -86,8 +88,6 @@
                     a1.setAttribute("class", "info");
                     a1.style.color = "#212529";
                     a1.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
-                    eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
-                    eventInfoSide.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
                     eventInfoFooter.appendChild(a1);
                     eventInfoSide.appendChild(a);
                 })

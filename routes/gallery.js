@@ -56,7 +56,7 @@ router.get("/new", isLoggedIn, function(req, res){
 });
 
 router.get("/:id", function(req, res){
-    Gallery.findById(req.params.id, function(err, gallery){
+    Gallery.findById(req.params.id).populate("pictures").exec(function(err, gallery){
         if(err){
             console.log(err)
         } else {
@@ -141,7 +141,7 @@ router.post("/:id/add/picture", upload.single("picture"), function(req, res){
                     console.log(err)
                 } else {
                     Picture.create({link: result.secure_url}, (err, createdPicture) => {
-                        gallery.pictures.push(createdPicture);
+                        gallery.pictures.push(createdPicture._id);
                         gallery.save();
                         res.redirect("/gallery/" + gallery._id)
                     })

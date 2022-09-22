@@ -17,18 +17,11 @@
                 </div>
             </form>
             <div class="dropdown text-center">
-                <button class="btn-danger dropdown-toggle justify-content-center" id="applications" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Wyszukaj po kategorii
+                <button class="btn btn-danger dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Wyszukaj po kategorii
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
-                  
-
-                    <a class="dropdown-item" href="/applications/category/B">Kategoria B</a>
-                    <a class="dropdown-item" href="/applications/category/A">Kategoria A</a>
-                    <a class="dropdown-item" href="/applications/category/AM">Kategoria AM</a>
-                    <a class="dropdown-item" href="/applications/category/A1">Kategoria A1</a>
-                    <a class="dropdown-item" href="/applications/category/A2">Kategoria A2</a>
-                    <a class="dropdown-item" href="/applications/category/B Express">Kategoria B Express</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee" id="applications">
+                
                 </div>
             </div>
         </div>
@@ -62,7 +55,7 @@
                             <p>
                                 <% if(applications[i].isApplicated === false){ %>
                                 <form action="/application/<%= applications[i]._id %>/accepted" method="post">
-                                    <input type="submit" value="Zapisany na kurs" class="btn btn-outline-success">
+                                    <input type="submit" value="Potwierdź zapisanie" class="btn btn-success">
                                 </form>
                                 <% } else { %>
                                 <a href="/application/<%= applications[i]._id %>/delete" class="btn-danger">Usuń

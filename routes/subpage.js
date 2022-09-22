@@ -140,6 +140,16 @@ router.post("/:id", isLoggedIn, function(req, res){
     });
 });
 
+router.get("/:id/delete", isLoggedIn, function(req, res){
+    Subpage.findByIdAndRemove(req.params.id, function(err, removedSubpage){
+        if(err){
+            console.log(err)
+        } else {
+            res.redirect("/subpages/strona-główna");
+        }
+    });
+});
+
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();

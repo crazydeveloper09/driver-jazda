@@ -67,7 +67,7 @@ router.get("/register", function(req, res){
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/subpages/strona-główna",
     failureRedirect: "/login",
     failureFlash: true
 }), function(req, res) {
@@ -77,7 +77,7 @@ router.get("/logout", function(req, res) {
     req.logout(function(err) {
         if (err) { return next(err); }
         res.redirect('/subpages/strona-główna');
-      });
+    });
 });
 
 router.post("/register", function(req, res){

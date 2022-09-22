@@ -14,7 +14,7 @@ app.use(flash());
 
 router.get("/new", isLoggedIn, function(req, res){
     Subpage.findById(req.params.subpage_id, (err, subpage) => {
-        res.render("./lists/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj listę do podstrony",subpage_id: req.params.subpage_id});
+        res.render("./lists/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Dodaj listę do podstrony",subpage: subpage});
     })
    
            

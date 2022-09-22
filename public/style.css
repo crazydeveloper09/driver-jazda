@@ -50,18 +50,7 @@ body,html {
 .logo {
     text-transform: uppercase;
 }
-input[type=text],
-input[type=tel],
-input[type=email],
-input[type=password],
-input[type=time],
-input[type=number],
-input[type=date] {
-    background: none;
-    border: none;
-    border-bottom: 1px solid black;
-    color: black;
-}
+
 .sidebar {
     background: linear-gradient(#131314, rgb(166, 3, 40))
 }
@@ -81,24 +70,23 @@ input[type=date] {
     font-size: 18px;
     
 }
-input[type=text]::placeholder,
-input[type=tel]::placeholder,
-input[type=email]::placeholder,
-input[type=password]::placeholder,
-input[type=number]::placeholder {
-    color: black;
+input[type=text]:focus,
+input[type=tel]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=number]:focus {
+    border: 2px solid rgb(166, 3, 40);
+    color: rgb(166, 3, 40);
+    box-shadow: none;
 }
 
-#textarea::placeholder {
-    
-    color: black;
-}
 
-#textarea {
-    background: none;
-    border: none;
-    border-bottom: 1px solid black;
-    color: black;
+
+
+#textarea:focus {
+    border: 2px solid rgb(166, 3, 40);
+    color: rgb(166, 3, 40);
+    box-shadow: none;
 }
 .card {
     background: #eeeeee;
@@ -107,8 +95,35 @@ input[type=number]::placeholder {
 #side {
     display: block;
 }
-input[type=search] {
-    color: #dc3545;
+
+
+input[type=search]::placeholder {
+    color: rgb(166, 3, 40);
+}
+
+
+
+.btn.btn-red {
+    background: rgb(166, 3, 40);
+    padding: 7px 12px;
+    border: 1px solid rgb(166, 3, 40);
+    color: white;
+    border-radius: 0.4em;
+}
+.btn.btn-red:hover {
+    background: rgb(166, 3, 40);
+    color: white;
+}
+.btn.btn-full {
+    width: 100%;
+    font-weight: 700;
+}
+.btn.btn-black {
+    background: #131314;
+    border: 1px solid  #131314;
+    border-radius: 0.4em;
+    padding: 7px 12px;
+    color: white;
 }
 
 

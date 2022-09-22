@@ -10,7 +10,7 @@
         </div>
         <div class="col-lg-8 col-md-12">
             <div class="card" style="background: #eeeeee">
-                <img src="<%= gallery.profile %>" alt="" class="card-img-top">
+                <img src="<%= gallery.profile %>" alt="" class="card-img-top" crossorigin="anonymous">
                 <div class="card-title info text-center text-danger">                            
                     
                     <br>
@@ -44,7 +44,7 @@
                         <div class="row">
                             <% for(let i=0;i<gallery.pictures.length;i++){ %>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <img src="<%= gallery.pictures[i].link %>" alt="" class="img-thumbnail">
+                                    <img src="<%= gallery.pictures[i].link %>" alt="" class="img-thumbnail" crossorigin="anonymous">
                                     <% if(currentUser){ %>
                                         <br>
                                         <a href="/gallery/pictures/<%= gallery.pictures[i]._id %>/delete" class="info text-danger">Usuń zdjęcie</a>

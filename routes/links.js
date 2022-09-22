@@ -27,7 +27,7 @@ router.post("/", isLoggedIn, function(req, res){
         } else {
             
           
-            res.redirect("/home");
+            res.redirect("/subpages/strona-główna");
                
         }
     })

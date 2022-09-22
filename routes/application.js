@@ -3,6 +3,7 @@ const express             = require("express"),
     router                = express.Router(),
     methodOverride        = require("method-override"),
     Event                = require("../models/event"),
+    Course                = require("../models/course"),
     Application                = require("../models/application"),
     flash                 = require("connect-flash"),
     xoauth2               = require("xoauth2"),
@@ -20,7 +21,7 @@ app.use(flash());
 router.get("/search", isLoggedIn, (req, res) => {
     const regex = new RegExp(escapeRegex(req.query.name), 'gi');
     Application.find({name: regex}).populate([{ 
-        path: 'events',
+        path: 'event',
         populate: {
           path: 'office',
           model: 'Office'
@@ -38,13 +39,13 @@ router.get("/search", isLoggedIn, (req, res) => {
     })
 })
 
-router.get("/category/:category", isLoggedIn, function(req, res){
+router.get("/courses/:category", isLoggedIn, function(req, res){
     Course.findOne({category: req.params.category}, (err, course) => {
         if(err){
             console.log(err);
         } else {
             Application.find({course: course._id}).populate([{ 
-                path: 'events',
+                path: 'event',
                 populate: {
                   path: 'office',
                   model: 'Office'
@@ -65,14 +66,11 @@ router.get("/category/:category", isLoggedIn, function(req, res){
 })
 
 router.get("/new", function(req, res){
-    Event.findById(req.query.event_id).populate("course", "office").exec(function(err, event){
+    Event.findById(req.query.event_id).populate(["course", "office"]).exec(function(err, event){
         if(err){
             console.log(err);
         } else {
-          
-            res.render("./applications/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Zapisz się na kurs", event:event});
-                   
-               
+            res.render("./applications/new", {currentUser: req.user,header:"Driver Nauka Jazdy | Motocykle | Zapisz się na kurs", event:event});
         }
     });
     
@@ -80,7 +78,7 @@ router.get("/new", function(req, res){
 
 router.get("/", isLoggedIn, function(req, res){
     Application.find({}).populate(["course", { 
-        path: 'events',
+        path: 'event',
         populate: {
           path: 'office',
           model: 'Office'
@@ -138,7 +136,7 @@ router.get("/:id/delete", isLoggedIn, function(req, res){
 router.post("/:id/accepted", isLoggedIn, function(req, res, next){
     
             Application.findById(req.params.id).populate(["course", { 
-                path: 'events',
+                path: 'event',
                 populate: {
                   path: 'office',
                   model: 'Office'

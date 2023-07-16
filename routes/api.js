@@ -21,7 +21,6 @@ router.get("/events", (req, res) => {
             console.log(err);
         } else {
             res.json(events);
-           
         }
     })
 });

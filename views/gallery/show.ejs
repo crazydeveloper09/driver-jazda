@@ -1,64 +1,40 @@
 <%- include("../partials/header") %>
-<br>
-<br>
-<br>
-<div class="container">
-    
-    <div class="row">
-        <div class="col-lg-4 d-md-none d-lg-block" id="side">
-            <%- include("../partials/side") %>
-        </div>
-        <div class="col-lg-8 col-md-12">
-            <div class="card" style="background: #eeeeee">
-                <img src="<%= gallery.profile %>" alt="" class="card-img-top" crossorigin="anonymous">
-                <div class="card-title info text-center text-danger">                            
+<div class="gallery__show">
+    <div class="gallery__show-image">
+        <img src="<%= gallery.profile %>" alt="<%= gallery.title %>" crossorigin="anonymous">
+    </div>
+    <div class="gallery__show-info">
+        <h2 class="gallery__show-title"><%= gallery.title %></h2>
+        <% if(currentUser){ %>
+            <div class="dropdown">
+                <a class="btn btn-danger dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Modyfikacja
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+
+                    <a class="dropdown-item" href="/gallery/<%= gallery._id %>/edit">Edytuj tytuł</a>
+                    <a class="dropdown-item" href="/gallery/<%= gallery._id %>/delete">Usuń</a>
+                    <a class="dropdown-item" href="/gallery/<%= gallery._id %>/add/picture">Dodaj zdjęcie</a>
+                    <a class="dropdown-item" href="/gallery/<%= gallery._id %>/edit/profile">Edytuj zdjęcie główne</a>
                     
-                    <br>
-                   <strong style="text-transform: uppercase;margin-left: 3%;"><%= gallery.title %></strong>
-                </div>
-                <div class="card-body">
-                    <% if(currentUser){ %>
-                        <div class="dropdown">
-                            <a class="btn btn-danger dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-                               Modyfikacja
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
-                              
-    
-                                <a class="dropdown-item" href="/gallery/<%= gallery._id %>/edit">Edytuj tytuł</a>
-                                <a class="dropdown-item" href="/gallery/<%= gallery._id %>/delete">Usuń</a>
-                                <a class="dropdown-item" href="/gallery/<%= gallery._id %>/add/picture">Dodaj zdjęcie</a>
-                                <a class="dropdown-item" href="/gallery/<%= gallery._id %>/edit/profile">Edytuj zdjęcie główne</a>
-                               
-                                
-                            </div>
-                        </div>
-                        <br>
-                    <% } %>
-                    
-                    <% if(gallery.pictures.length === 0){ %>
-                        <div class="alert alert-info">
-                            Nie dodaliśmy zdjęć do <%= gallery.title %>
-                        </div>
-                    <% } else { %>
-                        <div class="row">
-                            <% for(let i=0;i<gallery.pictures.length;i++){ %>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <img src="<%= gallery.pictures[i].link %>" alt="" class="img-thumbnail" crossorigin="anonymous">
-                                    <% if(currentUser){ %>
-                                        <br>
-                                        <a href="/gallery/pictures/<%= gallery.pictures[i]._id %>/delete" class="info text-danger">Usuń zdjęcie</a>
-                                    <% } %>
-                                </div>
-                            <% } %>
-                        </div>
-                    <% } %>
                 </div>
             </div>
+            <br>
+        <% } %>
+        <div class="gallery__show-rest">
+            <% for(let i=0;i<gallery.pictures.length;i++){ %>
+                <div class="gallery__show-picture">
+                    <img src="<%= gallery.pictures[i].link %>" alt="" class="img-thumbnail" crossorigin="anonymous">
+                    <% if(currentUser){ %>
+                        <br>
+                        <a href="/gallery/pictures/<%= gallery.pictures[i]._id %>/delete" class="info text-danger">Usuń zdjęcie</a>
+                    <% } %>
+                </div>
+            <% } %>
         </div>
     </div>
-        
-    
 </div>
-
+<script>
+    $("#gallery").addClass("active");
+</script>
 <%- include("../partials/footer") %>

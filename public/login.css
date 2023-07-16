@@ -1,11 +1,11 @@
 body {
   width: 100vw;
   height: 100vh;
-  background:  linear-gradient(rgb(166, 3, 40), #131314);
-  font-family: 'Montserrat', sans-serif;
+  background:#A60328;
+  font-family: 'Karla', sans-serif;
 }
 #info {
-  background:  linear-gradient(rgb(166, 3, 40), #131314);
+  background:#A60328;
   height: 100vh;
 }
 #form {
@@ -20,15 +20,15 @@ a {
 
 .form-control:focus {
   box-shadow: none;
-  border: 2px solid rgb(166, 3, 40);
+  border: 2px solid #A60328;
 }
 
 
 #form .login {
   font-size: 45px;
   font-weight: 700;
-  color: rgb(166, 3, 40);
-  font-family: 'Poppins', sans-serif;
+  color: #A60328;
+  font-family: 'Epilogue', sans-serif;
 }
 
 #form .username {
@@ -60,8 +60,8 @@ a {
   }
 }
 .btn-gradient {
-  background:  rgb(166, 3, 40);
-  border: 1px solid rgb(166, 3, 40);
+  background:  #A60328;
+  border: 1px solid #A60328;
 }
 #description_r {
   color: #c9c7c7;

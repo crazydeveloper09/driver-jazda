@@ -1,181 +1,73 @@
-<br>
-<footer class="d-md-block d-lg-none">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card" style="background: #eeeeee">
-                    <div class="card-title text-center text-danger toyota">
-                        <br>
-                        <i class="fas fa-info-circle"></i> Dodatkowe informacje
-                        
-                    </div>
-                    <div class="card-body">
-                            <div class="row text-center">                                
-                                <div class="col-lg-4 col-md-12">
-                                    <p class="title text-danger"><i class="fas fa-clock"></i> Najbliższe kursy</p>
-                                    <p class="footer" id="event_info_footers"><strong>Kliknij w wybrany termin, by się zapisać</strong></p>
-                                    
-                                </div>
-                                <div class="d-md-block d-lg-none">
-                                    <br>
-                                </div>
-                                <div class="col-lg-4 col-md-12">
-                                    <p class="title text-danger"><i class="fas fa-dollar-sign"></i> Ceny</p>
-                                    <p class="info" id="promo_footer"></p>
-                                   
-                                </div>
-                                <div class="col-lg-4 col-md-12">
-                                    <p class="title text-danger"> <i class="fas fa-address-book"></i> Kontakt</p>
-                                    <p class="info" id="offices_footer"></p>
-                                    
-                                </div>
-                            </div>
-                        <div class="footer text-center">
-                            <p>
-                                Driver <script>document.write(new Date().getFullYear())</script>  © Wszelkie prawa zastrzeżone by:
-                                <a href="https://websiteswithpassion.pl" target="_blank">Websites With Passion</a> 
-                                <br>
-                                 <a href="/login">Panel administracyjny</a> 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<footer class="d-md-none d-lg-block footer text-center" id="side">
+<section class="pricing">
+    <h2 class="pricing__header">Cennik</h2>
+    <div class="pricing__info" id="pricingdiv"></div>
+</section>
+<section class="links">
+    <h2 class="links__header">Polecane linki</h2>
+    <div class="links__list" id="links__list"></div>
+</section>
+<section class="locations">
+    <div class="locations__list" id="locations__list"></div>
+</section>
+<footer class="footer text-center">
     <p>
         Driver <script>document.write(new Date().getFullYear())</script>  © Wszelkie prawa zastrzeżone by:
-        <a href="https://websiteswithpassion.pl" target="_blank" style="color: black;">Websites With Passion</a> 
+        <a href="https://websiteswithpassion.pl" target="_blank" style="color: white;">Websites With Passion</a> 
         <br>
-         <a href="/login" style="color:black">Panel administracyjny</a> 
+        <a href="/login" style="color:white">Panel administracyjny</a> 
     </p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-   
-    axios.get('/api/events')
-        .then((response) => {
-            console.log(response);
-            const eventInfoFooter = document.getElementById("event_info_footers");
-            const eventInfoSide = document.getElementById("event_info_side");
-            eventInfoFooter.innerHTML = "<strong>Ładowanie najbliższych kursów</strong>";
-            eventInfoSide.innerHTML = "<strong>Ładowanie najbliższych kursów</strong>";
-            if(response.data.length === 0){
-                let alert = document.createElement("div");
-                alert.setAttribute("class", "alert alert-light");
-                alert.innerText = "Nie dodaliśmy jeszcze żadnych wydarzeń";
-				let alert1 = document.createElement("div");
-                alert1.setAttribute("class", "alert alert-light");
-                alert1.innerText = "Nie dodaliśmy jeszcze żadnych wydarzeń";
-                eventInfoFooter.innerHTML = "";
-                eventInfoSide.innerHTML = "";
-                eventInfoFooter.appendChild(alert);
-                eventInfoSide.appendChild(alert1);
-            } else {
-                eventInfoFooter.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
-                eventInfoSide.innerHTML = "<strong>Kliknij w wybrany termin, by się zapisać</strong>";
-                response.data.forEach((event) => {
-
-                    const a = document.createElement("a");
-                    a.setAttribute("href", `/applications/new?event_id=${event._id}`);
-                    a.setAttribute("class", "info");
-                    a.style.color = "#212529";
-                    a.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
-                    const a1 = document.createElement("a");
-                    a1.setAttribute("href", `/applications/new?event_id=${event._id}`);
-                    a1.setAttribute("class", "info");
-                    a1.style.color = "#212529";
-                    a1.innerHTML = `<br><strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course.category}`;
-                    eventInfoFooter.appendChild(a1);
-                    eventInfoSide.appendChild(a);
-                })
-            }
-            
-        })
-            
-        .catch((e) => {
-            const eventInfoFooter = document.getElementById("event_info_footer");
-            const eventInfoSide = document.getElementById("event_info_side");
-            let alert = document.createElement("div");
-                alert.setAttribute("class", "alert alert-light");
-                alert.innerText = e;
-               eventInfoFooter.appendChild(alert);
-               eventInfoSide.appendChild(alert);
-        })
-           
-        
-   
     axios
         .get("/api/links")
         .then((response) => {
-            const rLinksDropdown = document.getElementById("rlinks_dropdown")
-            const recommendedLinksSide = document.getElementById("recommended_links_side");
+            const recommendedLinksSection = document.getElementById("links__list");
             
             if(response.data.length === 0){
                 let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");
                 alert.innerText = "Nie znaleźliśmy polecanych linków";
-                recommendedLinksSide.innerText = "";
-                recommendedLinksSide.appendChild(alert)
+                recommendedLinksSection.innerText = "";
+                recommendedLinksSection.appendChild(alert)
             } else {
-               
-                response.data.forEach((link) => {
+
+                response.data.forEach((link, index) => {
                     
-                   const aLinkN = document.createElement("a");
-                    const aLinkD = document.createElement("a");
+                    const aLinkN = document.createElement("a");
                     const div = document.createElement("div")
                     
                     aLinkN.setAttribute("href", link.href);
                     aLinkN.setAttribute("target", "_blank");
-                    aLinkN.setAttribute("class", "info");
-                    aLinkN.style.color = "#212529";
                     aLinkN.innerText = link.title;
-                   
-                    aLinkD.setAttribute("href", link.href);
-                    aLinkD.setAttribute("target", "_blank");
-                    aLinkD.setAttribute("class", "dropdown-item");
-                    aLinkD.innerText = link.title;
-                   
+
                     div.appendChild(aLinkN)
-                    rLinksDropdown.appendChild(aLinkD);
-                    recommendedLinksSide.appendChild(div);
-                    
-                    
-                   
+                    recommendedLinksSection.appendChild(div);
                 })
             }
-           
         })
         .catch((err) => {
-            const recommendedLinksSide = document.getElementById("recommended_links_side");
+            const recommendedLinksSection = document.getElementById("recommended_links_side");
             let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");
                 alert.innerText = err;
-                recommendedLinksSide.appendChild(alert)
+                recommendedLinksSection.appendChild(alert)
         })
     axios
         .get("/api/courses")
         .then((response) => {
             console.log(response)
-            const promoSide = document.getElementById("promo_side");
-            const promoFooter = document.getElementById("promo_footer");
+            const pricingDiv = document.getElementById("pricingdiv");
             const coursesDropdown = document.getElementById("courses_dropdown");
             response.data.forEach((course) => {
                 const p = document.createElement("p");
                 
-                const p1 = document.createElement("p");
                 const a = document.createElement("a");
-                p.setAttribute("class", "info");
-                p.innerHTML = `Kategoria ${course.category} - <span class="text-danger"><strong><ins>${course.price}zł</ins></strong></span>`;
-                p1.setAttribute("class", "info");
-                p1.innerHTML = `Kategoria ${course.category} - <span class="text-danger"><strong><ins>${course.price}zł</ins></strong></span>`;
+                p.innerHTML = `Kategoria ${course.category} - ${course.price}zł`;
                 a.setAttribute("class", "dropdown-item");
                 a.setAttribute("href", `/courses/${course.category}`);
                 a.innerText = `Kategoria ${course.category}`;
-                promoFooter.appendChild(p);
-                promoSide.appendChild(p1);
+                pricingDiv.appendChild(p);
                 coursesDropdown.appendChild(a);
             })
 
@@ -183,18 +75,17 @@
         })
         .catch((err) => {
             const promoSide = document.getElementById("promo_side");
-            const promoFooter = document.getElementById("promo_footer");
+            const pricingDiv = document.getElementById("pricingdiv");
             let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");
                 alert.innerText = err;
                 promoSide.appendChild(alert);
-                promoFooter.appendChild(alert)
+                pricingDiv.appendChild(alert)
         })
         axios
         .get("/api/driver")
         .then((response) => {
-            const headerOffices = document.getElementById("headerOffices");
-            const officesFooter = document.getElementById("offices_footer");
+            const officesFooter = document.getElementById("locations__list");
             
             if(response.data.length === 0){
                 let alert = document.createElement("div");
@@ -203,36 +94,18 @@
                 officesFooter.appendChild(alert)
             } else {
                 console.log(response.data)
-               
                     response.data.carOffices.forEach((office) => {
-                        const div = document.createElement("div");
-                        const p = document.createElement("p")
-                        const p1 = document.createElement("p")
-                        p1.setAttribute("class", "offices");
-                        p.setAttribute("class", "info");
-                        if(office.additional){
-                            p.innerHTML = `<strong>${office.city}, ul. ${office.street}</strong> <br>${office.additional}`;
-                            p1.innerHTML = `${office.city}, ul. ${office.street} <br>${office.additional} <br> ${office.what}`
-                        } else {
-                            p.innerHTML = `<strong>${office.city}, ul. ${office.street}</strong>`;
-                            p1.innerHTML = `${office.city}, ul. ${office.street} <br> ${office.what}`
-                        }
-                        div.className = "col-lg-4";
-                        div.append(p1);
-                        headerOffices.appendChild(div)
-                        officesFooter.appendChild(p);
+                        const div = document.createElement("div")
+                        div.innerHTML = `<strong>${office.city}, ul. ${office.street} <br> ${office.what}</strong>`;
+                        officesFooter.appendChild(div);
                     })
-                   
-                   const tel = document.createElement("p")
-                   tel.setAttribute("class", "info")
-                   tel.innerHTML = `tel. <strong><ins>${response.data.phone}</ins></strong>`
-                   officesFooter.appendChild(tel)
+               
                 
             }
            
         })
         .catch((err) => {
-            const officesFooter = document.getElementById("offices_footer");
+            const officesFooter = document.getElementById("locations__list");
             let alert = document.createElement("div");
                 alert.setAttribute("class", "alert alert-light");
                 alert.innerText = err;

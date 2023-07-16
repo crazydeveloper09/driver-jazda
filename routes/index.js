@@ -32,8 +32,6 @@ router.get("/home", (req, res) => {
             res.render("index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Strona Główna", announcements: announcements});
         }
     });
-           
-        
 })
 router.get("/about", function(req, res){
     
@@ -49,12 +47,17 @@ router.get("/contact", function(req, res){
         if(err) {
             console.log(err)
         } else {
-            res.render("contact", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Kontakt", user:user});
+            Event.find({type: 'car'}).populate(["course", "office"]).sort({date: 1}).limit(6).exec(function(err, events){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.render("contact", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Kontakt", user:user, events: events});
+                }
+            })
+            
         }
     })
-            
-           
-       
+        
     
 })
 

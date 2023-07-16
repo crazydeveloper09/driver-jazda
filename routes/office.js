@@ -71,7 +71,13 @@ router.get("/:office_id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("./offices/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Edytuj biuro", office:office, user: req.user});
+            Event.find({type: 'car'}).populate(["course", "office"]).sort({date: 1}).limit(6).exec(function(err, events){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.render("./offices/show", {currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | Mapka biura", office:office, user: req.user, events});
+                }
+            })
         }
     })
 });

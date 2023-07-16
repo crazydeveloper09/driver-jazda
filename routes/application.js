@@ -87,7 +87,7 @@ router.get("/", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            
+            console.log(applications)
             res.render("./applications/index", {currentUser: req.user, header:"Driver Nauka Jazdy | Samochody | Zapisy na kurs",applications:applications, events:applications});
                 
             

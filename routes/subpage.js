@@ -7,6 +7,7 @@ const express             = require("express"),
     Subpage                = require("../models/subpage"),
     Picture                = require("../models/picture"),
     Message                = require("../models/message"),
+    Event                = require("../models/event"),
     List               = require("../models/list"),
     Element               = require("../models/listElement"),
     Announcement               = require("../models/announcement"),
@@ -54,7 +55,20 @@ router.get("/:address", function(req, res){
             List.find({subpage: subpage._id}).populate("elements").exec((err, lists) => {
                 
                 Announcement.find({}, (err, announcements) => {
-                    res.render("./subpages/show", {announcements: announcements, currentUser: req.user,header:"Driver Nauka Jazdy | Samochody | " + subpage.name, subpage: subpage, lists: lists});
+                    Event.find({type: 'car'}).populate(["course", "office"]).sort({date: 1}).limit(6).exec(function(err, events){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            res.render("./subpages/show", {
+                                announcements: announcements, 
+                                currentUser: req.user,
+                                header:"Driver Nauka Jazdy | Samochody | " + subpage.name, 
+                                subpage: subpage, 
+                                lists: lists, 
+                                events: events
+                            });
+                        }
+                    })
                 })
                 
             })

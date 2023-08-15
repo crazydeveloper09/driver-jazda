@@ -8,10 +8,15 @@ body,html {
 }
 
 #mainNav.navbar {
-    justify-content: space-between;
     padding: 15px 75px;
-    align-content: baseline;
 }
+
+#mainNav .navbar-nav {
+    justify-content: center;
+    align-items: baseline;
+    gap: 19px;
+}
+
 #mainNav .nav-link{
     text-transform: uppercase;
     color: #000;
@@ -433,6 +438,10 @@ input[type=search]::placeholder,
         justify-content: space-between;
         padding: 15px;
         align-items: baseline;
+    }
+
+    #mainNav .navbar-nav {
+        display: block;
     }
 
     #mainNav .nav-link {

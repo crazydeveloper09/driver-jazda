@@ -10,7 +10,7 @@ body,html {
 #mainNav.navbar {
     justify-content: space-between;
     padding: 15px 75px;
-    align-items: baseline;
+    align-content: baseline;
 }
 #mainNav .nav-link{
     text-transform: uppercase;
@@ -434,9 +434,77 @@ input[type=search]::placeholder,
         padding: 15px;
         align-items: baseline;
     }
+
+    #mainNav .nav-link {
+        font-size: 21px;
+    }
+
     #eventCarousel .carousel-control-prev,
     #eventCarousel .carousel-control-next {
         width: 45px;
+    }
+
+    /* Fonts */
+
+    .course__subheader,
+    .contact__subheader {
+        font-size: 27px;
+    }
+
+    p.content__text {
+        margin-top: 29px; 
+    }
+
+    .content__text,
+    .contact__text,
+    .course__text {
+        font-size: 21px;
+    }
+
+    .content__header,
+    .contact__header,
+    .course__header,
+    .gallery__show-title {
+        font-size: 29px;
+    }
+
+    .content__message {
+        font-size: 29px;
+    }
+
+
+
+    .pricing__header,
+    .links__header {
+        font-size: 21px;
+    }
+
+    .pricing__info p,
+    .links__list a {
+        font-size: 21px;
+    }
+
+    .locations__list {
+        font-size: 21px;
+    }
+
+    .gallery .img__description a {
+        font-size: 19px;
+    }
+
+    /* Medias */
+
+    .carousel-inner {
+        padding: 0px 60px; 
+    }
+
+    .carousel-item h3,
+    .carousel-item p {
+        font-size: 21px;
+    }
+
+    .carousel-item a {
+        font-size: 18px;
     }
     .header {
         display: none;

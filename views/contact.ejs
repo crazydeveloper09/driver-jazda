@@ -1,35 +1,4 @@
 <%- include("partials/header") %>
-<div id="eventCarousel" class="carousel slide" data-ride="carousel">
-    
-    <div class="carousel-inner">
-
-        <% events.forEach((event, index) => { %>
-            <div class="carousel-item text-center <%= index === 0 ? 'active': '' %>">
-                <h3>Najbliższe kursy</h3>
-                <p><%- `<strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course?.category}` %></p>
-                <a href="/applications/new?event_id=<%= event._id %>">Zapisz się!</a>
-            </div>
-        <% }) %>
-
-    </div>
-    <ol class="carousel-indicators">
-        <% events.forEach((event, index) => { %>
-            <% if(index === 0){ %>
-                <li data-target="#eventCarousel" data-slide-to="<%= index %>" class="active"></li>
-            <% } else { %>
-                <li data-target="#eventCarousel" data-slide-to="<%= index %>"></li>
-            <% } %>
-        <% }) %>
-    </ol>
-    <a class="carousel-control-prev" href="#eventCarousel" role="button" data-slide="prev">
-        <span><i class="fa fa-angle-left carousel-controls" aria-hidden="true"></i></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#eventCarousel" role="button" data-slide="next">
-        <span><i class="fa fa-angle-right carousel-controls" aria-hidden="true"></i></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
 <main class="contact">
     <h2 class="contact__header">Kontakt - jak do nas dotrzeć?</h2>
     <% if(currentUser){ %>
@@ -108,6 +77,38 @@
         </div>
        
 </main>
+
+<div id="eventCarousel" class="carousel slide contactCarousel" data-ride="carousel">
+    
+    <div class="carousel-inner">
+
+        <% events.forEach((event, index) => { %>
+            <div class="carousel-item text-center <%= index === 0 ? 'active': '' %>">
+                <h3>Najbliższe kursy</h3>
+                <p><%- `<strong>${event.office.city}</strong>, ${event.date} o godz ${event.time}, kategoria ${event.course?.category}` %></p>
+                <a href="/applications/new?event_id=<%= event._id %>">Zapisz się!</a>
+            </div>
+        <% }) %>
+
+    </div>
+    <ol class="carousel-indicators">
+        <% events.forEach((event, index) => { %>
+            <% if(index === 0){ %>
+                <li data-target="#eventCarousel" data-slide-to="<%= index %>" class="active"></li>
+            <% } else { %>
+                <li data-target="#eventCarousel" data-slide-to="<%= index %>"></li>
+            <% } %>
+        <% }) %>
+    </ol>
+    <a class="carousel-control-prev" href="#eventCarousel" role="button" data-slide="prev">
+        <span><i class="fa fa-angle-left carousel-controls" aria-hidden="true"></i></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#eventCarousel" role="button" data-slide="next">
+        <span><i class="fa fa-angle-right carousel-controls" aria-hidden="true"></i></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
 <script>
     $("#contact").addClass("active");

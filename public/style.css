@@ -70,6 +70,10 @@ strong.text-danger {
     font-family: 'Karla', sans-serif;
 }
 
+.contactCarousel {
+    margin: 60px 0;
+}
+
 #eventCarousel .carousel-indicators {
     position: unset;
     margin-top: 49px;

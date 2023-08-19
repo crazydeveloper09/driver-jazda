@@ -1,5 +1,33 @@
 <%- include("../partials/header") %>
-<div id="eventCarousel" class="carousel slide" data-ride="carousel">
+
+<main class="contact text-center">
+    <h2 class="contact__header"><%= office.name %></h2>
+    <p class="contact__text"><%= office.what %></p>
+    <p class="contact__text">
+        ul. <%= office.street %>
+                                        <% if(office.additional){ %>
+                                            <br>
+                                            <%= office.additional %>
+                                        <% } %>
+                                        
+                                        <br>
+                                        <%= office.postalCode %> <%= office.city %>
+    </p>
+    <p class="contact__text"><%= office.openingHours %></p>
+    <div id="map" style="width:100%; height: 400px"></div>
+    <% if(currentUser){ %>
+        <a href="/driver/<%= user._id %>/offices/<%= office._id %>/edit" class="info text-success">Edytuj biuro</a>
+        <a href="/driver/<%= user._id %>/offices/<%= office._id %>/delete" class="info text-danger">Usuń biuro</a>
+    <% } %>
+    <div id="lat" style="display: none;">
+        <%= office.lat %>
+    </div>
+    <div id="lng" style="display: none;">
+        <%= office.lng %>
+    </div>
+</main>
+
+<div id="eventCarousel" class="carousel slide contactCarousel" data-ride="carousel">
     
     <div class="carousel-inner">
 
@@ -30,32 +58,6 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<main class="content text-center">
-    <h2 class="content__header"><%= office.name %></h2>
-    <p class="content__text"><%= office.what %></p>
-    <p class="content__text">
-        ul. <%= office.street %>
-                                        <% if(office.additional){ %>
-                                            <br>
-                                            <%= office.additional %>
-                                        <% } %>
-                                        
-                                        <br>
-                                        <%= office.postalCode %> <%= office.city %>
-    </p>
-    <p class="content__text"><%= office.openingHours %></p>
-    <div id="map" style="width:100%; height: 400px"></div>
-    <% if(currentUser){ %>
-        <a href="/driver/<%= user._id %>/offices/<%= office._id %>/edit" class="info text-success">Edytuj biuro</a>
-        <a href="/driver/<%= user._id %>/offices/<%= office._id %>/delete" class="info text-danger">Usuń biuro</a>
-    <% } %>
-    <div id="lat" style="display: none;">
-        <%= office.lat %>
-    </div>
-    <div id="lng" style="display: none;">
-        <%= office.lng %>
-    </div>
-</main>
 <script>
     function initMap() {
       var lat = parseFloat(document.getElementById("lat").innerText);
@@ -66,12 +68,12 @@
           center: center,
           scrollwheel: false
       });
-      var contentString = `
+      var contactString = `
         <strong><%= office.name %><br />
         <%= office.street %>  <%= office.city %></strong>
       `
       var infowindow = new google.maps.InfoWindow({
-        content: contentString
+        contact: contactString
       });
       var marker = new google.maps.Marker({
           position: center,

@@ -158,6 +158,19 @@ strong.text-danger {
     letter-spacing: 1.6px;
 }
 
+.application__title {
+    font-size:24px; 
+    color:#A60328;
+    font-size: 700;
+    font-family: 'Karla', sans-serif;
+}
+
+.application__info {
+    font-family: 'Karla', sans-serif;
+    font-size: 20px;
+    color:#252525;
+}
+
 p.content__text {
    margin-top: 32px; 
 }

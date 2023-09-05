@@ -5,9 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <p class="text-center text-danger" id="name">
-               Wyszukiwanie zapisów na kurs po kategorii <%= param %>: <%= applications.length %>
-            </p>
+            <h2 class="content__header text-center">Wyszukiwanie zapisów na kurs po kategorii <%= param %>: <%= applications.length %></h2>
+            <br>
+            
             <form action="/applications/search" method="get">
                 <div class="input-group mb-3">
                     <input type="search" id="news" class="form-control" name="name" placeholder="Wpisz imię/nazwisko" aria-label="Wpisz imię/nazwisko" aria-describedby="basic-addon2">
@@ -40,18 +40,16 @@
             <% for(let i=applications.length-1;i>=0;i--){ %>
                 <div class="col-lg-4 col-md-6 col-sm-12"  style="margin-top:10px">
                     <div class="card" style="background: #eeeeee">
-                        <div class="card-title text-center text-danger toyota">
-                            <br>
-                            Zapis na kurs <%= applications[i]._id %>
-                        </div>
                         <div class="card-body">
     
-                            <p class="info">Imię i nazwisko: <strong><%= applications[i].name %></strong></p>
-                            <p class="info">Nr telefonu: <strong><%= applications[i].phone %></strong></p>
-                            <p class="info">Email: <strong><%= applications[i].email %></strong></p>
-                            <p class="info">Kategoria: <strong><%= applications[i].course.category %></strong></p>
-                            <p class="info">Data i godzina: <strong><%= applications[i].event.office.city %>, <%= applications[i].event.date %>
-                                <%= applications[i].event.time %></strong></p>
+                            <div class="card-title application__title text-center">
+                                <%= applications[i].name %>
+                            </div>
+                            <p class="application__info">Nr telefonu: <strong><%= applications[i].phone %></strong></p>
+                            <p class="application__info">Email: <strong><%= applications[i].email %></strong></p>
+                            <p class="application__info">Kategoria: <strong><%= applications[i].course.category %></strong></p>
+                            <p class="application__info">Data i godzina: <strong><%= applications[i].event?.office.city %>, <%= applications[i].event?.date %>
+                                <%= applications[i].event?.time %></strong></p>
                             <p>
                                 <% if(applications[i].isApplicated === false){ %>
                                 <form action="/application/<%= applications[i]._id %>/accepted" method="post">

@@ -39,11 +39,13 @@ router.get("/search", isLoggedIn, (req, res) => {
     })
 })
 
-router.get("/courses/:category", isLoggedIn, function(req, res){
-    Course.findOne({category: req.params.category}, (err, course) => {
+router.get("/courses/:course_id", isLoggedIn, function(req, res){
+    console.log(req.params.course_id)
+    Course.findById(req.params.course_id, (err, course) => {
         if(err){
             console.log(err);
         } else {
+            console.log(course)
             Application.find({course: course._id}).populate([{ 
                 path: 'event',
                 populate: {
@@ -55,7 +57,7 @@ router.get("/courses/:category", isLoggedIn, function(req, res){
                     console.log(err);
                 } else {
                     
-                    res.render("./applications/category", {applications: applications, currentUser: req.user, param: req.params.category, header: `Driver Nauka Jazdy | Samochody | Zapisy na kursy | Wyszukiwanie po parametrze ${req.params.category}`})
+                    res.render("./applications/category", {applications: applications, currentUser: req.user, param: course.category, header: `Driver Nauka Jazdy | Samochody | Zapisy na kursy | Wyszukiwanie po parametrze ${course.category}`})
                            
                         
                     
@@ -77,7 +79,7 @@ router.get("/new", function(req, res){
 });
 
 router.get("/", isLoggedIn, function(req, res){
-    Application.find({}).populate(["course", { 
+    Application.find({type: 'car'}).populate(["course", { 
         path: 'event',
         populate: {
           path: 'office',
@@ -113,8 +115,37 @@ router.post("/", function(req, res){
                     createdApplication.event = event._id;
                     createdApplication.course = event.course;
                     createdApplication.save();
-                    req.flash("success", "Twoja aplikacja na kurs została wysłana. Za niedługo przyjdzie email z potwierdzeniem i dalszymi instrukcjami");
-                    res.redirect("/")
+                    async function sendMail(application) {
+                        let smtpTransport = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                    type: "OAuth2",
+                                    user: 'driverjazdapl@gmail.com',
+                                    clientId: process.env.CLIENT_ID,
+                                    clientSecret: process.env.CLIENT_SECRET,
+                                    refreshToken: process.env.REFRESH_TOKEN
+                                    
+                                    
+                                
+                               
+                            }
+                        });
+                        let mailOptions = {
+                            to: application.email,
+                            from: 'Driver jazda',
+                            subject: "Zapis na kurs prawa jazdy kategorii " + application.course.category,
+                            text: 'Witaj ' + application.name + ', \n\n' + 
+                            'Właśnie zapisaliśmy Cię na kurs prawa jazdy kategorii ' + application.course.category +
+                            '. Poczekaj na potwierdzenie zapisu z dodatkowymi informacjami.' +
+                            'Pozdrawiamy,' + '\n' + 'Zespół Driver jazda'  
+                        };
+                        smtpTransport.sendMail(mailOptions, function(err){
+                            req.flash("success", "Twoja aplikacja na kurs została wysłana. Za niedługo przyjdzie email z potwierdzeniem i dalszymi instrukcjami");
+                            res.redirect("/")
+                            done(err, 'done');
+                        });
+                    }
+                    sendMail(createdApplication);
                 }
             })
         }
@@ -177,7 +208,7 @@ router.post("/:id/accepted", isLoggedIn, function(req, res, next){
                         done(err, 'done');
                     });
                 }
-                sendMail(createdApplication);
+                sendMail(application);
                 application.isApplicated = true;
                 application.save();
                 res.redirect('/applications');

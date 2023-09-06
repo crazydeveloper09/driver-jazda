@@ -69,12 +69,18 @@ router.get("/register", function(req, res){
     res.render("register", {header:"Driver Nauka Jazdy | Samochody | Rejestracja"})
 });
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/subpages/strona-główna",
-    failureRedirect: "/login",
-    failureFlash: true
-}), function(req, res) {
-
+router.post("/login", function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { 
+           req.flash("error", "Zła nazwa użytkownika lub hasło");
+            return res.redirect(`/login`); 
+          }
+        req.logIn(user, function(err) {
+          if (err) { return next(err); }
+          return res.redirect('/subpages/strona-główna');
+        });
+      })(req, res, next);
 });
 router.get("/logout", function(req, res) {
     req.logout(function(err) {

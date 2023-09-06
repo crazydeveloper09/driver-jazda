@@ -79,7 +79,7 @@ router.get("/new", function(req, res){
 });
 
 router.get("/", isLoggedIn, function(req, res){
-    Application.find({type: 'car'}).populate(["course", { 
+    Application.find({}).populate(["course", { 
         path: 'event',
         populate: {
           path: 'office',

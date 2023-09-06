@@ -18,7 +18,7 @@ app.use(flash());
 
 router.get("/", function(req, res){
    
-    res.render("landing", { header:"Driver Nauka Jazdy | Samochody | Przywitanie"});
+    res.redirect('/subpages/strona-główna');
                
    
 })

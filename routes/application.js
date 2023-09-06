@@ -219,6 +219,7 @@ router.post("/:id/accepted", isLoggedIn, function(req, res, next){
 });
 
 function isLoggedIn(req, res, next) {
+    console.log(req.user)
     if(req.isAuthenticated()) {
         return next();
     }

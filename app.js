@@ -44,8 +44,8 @@ app.use(methodOverride("_method"));
 
 app.use(require("express-session")({
     secret: "heheszki",
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(function(req, res, next) {
 	res.locals.host = req.headers.host;
@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
 });
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(Driver.authenticate()));
+passport.use(Driver.createStrategy());
 passport.serializeUser(Driver.serializeUser());
 passport.deserializeUser(Driver.deserializeUser());
 
